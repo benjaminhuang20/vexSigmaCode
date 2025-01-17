@@ -164,6 +164,8 @@ void pre_auton() {
     }
     task::sleep(10);
   }
+
+
 }
 
 /**
@@ -270,4 +272,7 @@ int main() {
   while (true) {
     wait(100, msec);
   }
+
 }
+//what the sigma is this
+//help not working
