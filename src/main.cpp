@@ -225,9 +225,9 @@ void usercontrol(void) {
   bool ifTheButtonWithTheNameL2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
   bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
-  bool ClampOn;
-  bool ToggleA, ToggleX, ToggleR2, ToggleL2;
-  int ArmAngle;
+  bool ClampOn = false;
+  bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
+  int ArmAngle = 0;
   int ControllerUpdate;
 
 
@@ -241,10 +241,10 @@ void usercontrol(void) {
     if(Controller.ButtonR2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleR2){
         ClampOn = !ClampOn;
-        ToggleR2 = true;
+        ToggleR2 = false;
       }
     }else{
-      ToggleR2 = false;
+      ToggleR2 = true;
     }
     Brain.Screen.setCursor(2,1);
     if(ClampOn){
@@ -256,7 +256,7 @@ void usercontrol(void) {
       clampB = true;
       Brain.Screen.print("Clamp Retracted");
     }
-
+    //set clamp here
 
     if(Controller.ButtonX.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleX){
@@ -286,14 +286,6 @@ void usercontrol(void) {
       ToggleL2 = true;
     }
     // pls work
-    
-    
-
-
-
-
-
-
 
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() * (-1) + Controller.ButtonL1.pressing()) * 1000;
@@ -301,7 +293,7 @@ void usercontrol(void) {
 
     
 
-    testMotor.spin(vex::directionType::fwd, Controller.Axis1.position(percent), vex::velocityUnits::pct);; 
+    // testMotor.spin(vex::directionType::fwd, Controller.Axis1.position(percent), vex::velocityUnits::pct);; 
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
