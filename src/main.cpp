@@ -223,6 +223,7 @@ void usercontrol(void) {
   bool ifTheButtonWithTheNameL2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
   bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
+  bool ClampOn;
   bool ToggleA, ToggleX, ToggleR2, ToggleL2;
   int ArmAngle;
   int ControllerUpdate;
@@ -232,17 +233,39 @@ void usercontrol(void) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
     chassis.control_arcade();
     Brain.Screen.clearScreen();
+    Brain.Screen.setCursor(1,1);
     Brain.Screen.print("Battery"), Brain.Screen.print(Brain.Battery.capacity());
 
-    if(Controller.ButtonX.pressing()){
-    if(ToggleX){
-      //doinker
-      Brain.Screen.print("Thingy Toggled");
-      ToggleX = false;
+    if(Controller.ButtonR2.pressing()){
+      if(ToggleR2){
+        ClampOn = !ClampOn;
+        ToggleR2 = true;
+      }
+    }else{
+      ToggleR2 = false;
     }
+    Brain.Screen.setCursor(2,1);
+    if(ClampOn){
+      clampA = true;
+      clampB = false;
+      Brain.Screen.print("Clamp Extended");
+    }else{
+      clampA = false;
+      clampB = true;
+      Brain.Screen.print("Clamp Retracted");
+    }
+
+
+    if(Controller.ButtonX.pressing()){
+      if(ToggleX){
+      //doinker
+        Brain.Screen.print("Doinker Toggled");
+        ToggleX = false;
+      }
     }else{
       ToggleX = true;
     }
+
     if(Controller.ButtonL2.pressing()){
     if(ToggleL2){
       ArmAngle++;
