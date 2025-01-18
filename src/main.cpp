@@ -229,25 +229,50 @@ void usercontrol(void) {
 
 
   while (1) {
-    // This is the main execution loop for the user control program.
-    // Each time through the loop your program should update motor + servo
-    // values based on feedback from the joysticks.
-
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to
-    // update your motors, etc.
-    // ........................................................................
-
-    //Replace this line with chassis.control_tank(); for tank drive 
-    //or chassis.control_holonomic(); for holo drive.
+    // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
     chassis.control_arcade();
-    
+    Brain.Screen.clearScreen();
     Brain.Screen.print("Battery"), Brain.Screen.print(Brain.Battery.capacity());
+
+    if(Controller.ButtonX.pressing()){
+    if(ToggleX){
+      //doinker
+      Brain.Screen.print("Thingy Toggled");
+      ToggleX = false;
+    }
+    }else{
+      ToggleX = true;
+    }
+    if(Controller.ButtonL2.pressing()){
+    if(ToggleL2){
+      ArmAngle++;
+      if(ArmAngle % 3 == 0){
+        //Arm Angle 1
+      }else if(ArmAngle % 3 == 1){
+        //Arm Angle 2
+      }else{
+        //Arm Angle 3
+      }
+      Brain.Screen.print("Arm Toggled");
+      ToggleL2 = false;
+      
+    }
+    }else{
+      ToggleL2 = true;
+    }
+    
+    
+
+
+
+
+
+
+
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() * (-1) + Controller.ButtonL1.pressing()) * 1000;
     Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
-    //add stuff
-    //Buttons:
+
     
 
     testMotor.spin(vex::directionType::fwd, Controller.Axis1.position(percent), vex::velocityUnits::pct);; 
