@@ -236,7 +236,7 @@ void usercontrol(void) {
     Brain.Screen.setCursor(1,1);
     Brain.Screen.print("Battery"), Brain.Screen.print(Brain.Battery.capacity());
 
-    if(Controller.ButtonR2.pressing()){
+    if(Controller.ButtonR2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleR2){
         ClampOn = !ClampOn;
         ToggleR2 = true;
@@ -256,7 +256,7 @@ void usercontrol(void) {
     }
 
 
-    if(Controller.ButtonX.pressing()){
+    if(Controller.ButtonX.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleX){
       //doinker
         Brain.Screen.print("Doinker Toggled");
@@ -266,7 +266,7 @@ void usercontrol(void) {
       ToggleX = true;
     }
 
-    if(Controller.ButtonL2.pressing()){
+    if(Controller.ButtonL2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleL2){
       ArmAngle++;
       if(ArmAngle % 3 == 0){
