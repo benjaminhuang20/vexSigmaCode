@@ -117,44 +117,45 @@ bool auto_started = false;
  * be more descriptive, if you like.
  */
 
+
 void pre_auton() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   default_constants();
 
   while(!auto_started){
-    Brain.Screen.clearScreen();
-    Brain.Screen.printAt(5, 20, "JAR Template v1.2.0");
-    Brain.Screen.printAt(5, 40, "Battery Percentage:");
-    Brain.Screen.printAt(5, 60, "%d", Brain.Battery.capacity());
-    Brain.Screen.printAt(5, 80, "Chassis Heading Reading:");
-    Brain.Screen.printAt(5, 100, "%f", chassis.get_absolute_heading());
-    Brain.Screen.printAt(5, 120, "Selected Auton:");
+    // Brain.Screen.clearScreen();
+    // Brain.Screen.printAt(5, 20, "JAR Template v1.2.0");
+    // Brain.Screen.printAt(5, 40, "Battery Percentage:");
+    // Brain.Screen.printAt(5, 60, "%d", Brain.Battery.capacity());
+    // Brain.Screen.printAt(5, 80, "Chassis Heading Reading:");
+    // Brain.Screen.printAt(5, 100, "%f", chassis.get_absolute_heading());
+    // Brain.Screen.printAt(5, 120, "Selected Auton:");
     switch(current_auton_selection){
-      case 0:
-        Brain.Screen.printAt(5, 140, "Auton 1");
-        break;
-      case 1:
-        Brain.Screen.printAt(5, 140, "Auton 2");
-        break;
-      case 2:
-        Brain.Screen.printAt(5, 140, "Auton 3");
-        break;
-      case 3:
-        Brain.Screen.printAt(5, 140, "Auton 4");
-        break;
-      case 4:
-        Brain.Screen.printAt(5, 140, "Auton 5");
-        break;
-      case 5:
-        Brain.Screen.printAt(5, 140, "Auton 6");
-        break;
-      case 6:
-        Brain.Screen.printAt(5, 140, "Auton 7");
-        break;
-      case 7:
-        Brain.Screen.printAt(5, 140, "Auton 8");
-        break;
+      // case 0:
+      //   Brain.Screen.printAt(5, 140, "Auton 1");
+      //   break;
+      // case 1:
+      //   Brain.Screen.printAt(5, 140, "Auton 2");
+      //   break;
+      // case 2:
+      //   Brain.Screen.printAt(5, 140, "Auton 3");
+      //   break;
+      // case 3:
+      //   Brain.Screen.printAt(5, 140, "Auton 4");
+      //   break;
+      // case 4:
+      //   Brain.Screen.printAt(5, 140, "Auton 5");
+      //   break;
+      // case 5:
+      //   Brain.Screen.printAt(5, 140, "Auton 6");
+      //   break;
+      // case 6:
+      //   Brain.Screen.printAt(5, 140, "Auton 7");
+      //   break;
+      // case 7:
+      //   Brain.Screen.printAt(5, 140, "Auton 8");
+      //   break;
     }
     if(Brain.Screen.pressing()){
       while(Brain.Screen.pressing()) {}
@@ -214,6 +215,16 @@ void autonomous(void) {
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
+  
+int ControllerUpdate;
+
+void controllerPrint(int screenLine, std::string controllerText) {
+  if (ControllerUpdate == 0) {
+  Controller.Screen.setCursor(screenLine, 1);
+  Controller.Screen.print(controllerText.c_str());
+  }
+
+}
 
 void usercontrol(void) {
   // User control code here, inside the loop
@@ -228,7 +239,10 @@ void usercontrol(void) {
   bool ClampOn = false;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
-  int ControllerUpdate;
+
+
+
+
 
 
   while (1) {
@@ -236,17 +250,26 @@ void usercontrol(void) {
     chassis.control_arcade();
     Brain.Screen.clearScreen();
     Brain.Screen.setCursor(1,1);
-    Brain.Screen.print("Battery"), Brain.Screen.print(Brain.Battery.capacity());
+    Brain.Screen.print("Battery: "), Brain.Screen.print(Brain.Battery.capacity());
+    Brain.Screen.setCursor(2,1);
+    Brain.Screen.print("- Functions -");
+
+    controllerPrint(1,"happy");
+
+  
+
+
+
 
     if(Controller.ButtonR2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
-      if(ToggleR2){
+      if(ToggleR2 == true){
         ClampOn = !ClampOn;
         ToggleR2 = false;
       }
     }else{
       ToggleR2 = true;
     }
-    Brain.Screen.setCursor(2,1);
+    Brain.Screen.setCursor(4,1);
     if(ClampOn){
       clampA = true;
       clampB = false;
