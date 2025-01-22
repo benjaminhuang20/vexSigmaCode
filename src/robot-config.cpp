@@ -12,26 +12,26 @@ brain  Brain;
 
 //Add your devices below, and don't forget to do the same in robot-config.h:
 
-motor testMotor = motor(PORT1, ratio6_1, true); 
 
-motor frontLeft = motor(PORT1, ratio6_1, true); 
-motor MiddleLeft = motor(PORT1, ratio6_1, true);
+
+motor frontLeft = motor(PORT6, ratio6_1, true); 
+motor MiddleLeft = motor(PORT9, ratio6_1, true);
 motor UpsidedownLeft = motor(PORT1, ratio6_1, false);
 
 motor_group chassisLeft = motor_group(frontLeft, MiddleLeft, UpsidedownLeft); 
 
-motor frontRight = motor(PORT1, ratio6_1, true); 
-motor MiddleRight = motor(PORT1, ratio6_1, true);
-motor UpsidedownRight = motor(PORT1, ratio6_1, false);
+motor frontRight = motor(PORT7, ratio6_1, true); 
+motor MiddleRight = motor(PORT8, ratio6_1, true);
+motor UpsidedownRight = motor(PORT5, ratio6_1, false);
 
 motor_group chassisRight = motor_group(frontRight, MiddleRight, UpsidedownRight);
 
-motor Arm1 = motor(PORT1, ratio6_1, true);
-motor Arm2 = motor(PORT1, ratio6_1, false);
+motor Arm1 = motor(PORT10, ratio6_1, true);
+motor Arm2 = motor(PORT19, ratio6_1, false);
 
 motor_group Arms = motor_group(Arm1, Arm2);
 
-motor Intake = motor(PORT1, ratio6_1, true);
+motor Intake = motor(PORT20, ratio6_1, true);
 
 digital_out clampA = digital_out(Brain.ThreeWirePort.A); 
 digital_out clampB = digital_out(Brain.ThreeWirePort.B); 

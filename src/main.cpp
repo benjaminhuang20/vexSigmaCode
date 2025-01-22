@@ -342,11 +342,14 @@ void usercontrol(void) {
     if(ToggleL2){
       ArmAngle++;
       if(ArmAngle % 3 == 0){
-        //Arm Angle 1
+        Arm1.spinToPosition(0, rotationUnits::deg, 0, vex::velocityUnits::pct);
+        Arm2.spinToPosition(0, rotationUnits::deg, 0, vex::velocityUnits::pct);
       }else if(ArmAngle % 3 == 1){
-        //Arm Angle 2
+        Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }else{
-        //Arm Angle 3
+        Arm1.spinToPosition(0, rotationUnits::deg, 180, vex::velocityUnits::pct);
+        Arm2.spinToPosition(0, rotationUnits::deg, 180, vex::velocityUnits::pct);
       }
       Brain.Screen.print("Arm Toggled");
       ToggleL2 = false;
