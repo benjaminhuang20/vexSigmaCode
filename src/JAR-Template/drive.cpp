@@ -692,11 +692,18 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
  */
 
 void Drive::control_arcade(double DrivePower){
-  float throttle = deadband(controller(primary).Axis3.value()*DrivePower, 5);
-  float turn = deadband(controller(primary).Axis1.value()*DrivePower, 5);
+  float throttle = deadband(controller(primary).Axis3.value(), 5);
+  float turn = deadband(controller(primary).Axis1.value(), 5);
   DriveL.spin(fwd, to_volt(throttle+turn), volt);
   DriveR.spin(fwd, to_volt(throttle-turn), volt);
 }
+
+// void Drive::control_arcade(double DrivePower){
+//   float throttle = deadband(controller(primary).Axis3.value()*DrivePower, 5);
+//   float turn = deadband(controller(primary).Axis1.value()*DrivePower, 5);
+//   DriveL.spin(fwd, to_volt(throttle+turn), volt);
+//   DriveR.spin(fwd, to_volt(throttle-turn), volt);
+// }
 
 /**
  * Controls a chassis with left stick throttle and strafe, and right stick turning.

@@ -273,18 +273,21 @@ void usercontrol(void) {
     //   ControllerUpdate = 0;
     // OrderedUpdate = 0;
     // }
-    if(SlowMode){
+    // if(SlowMode){
 
-      // Brain.Screen.print("Slow Mode");
-      // controllerPrint(2,"Slow Mode");
-      chassis.control_arcade(.5);
+    //   // Brain.Screen.print("Slow Mode");
+    //   // controllerPrint(2,"Slow Mode");
+    //   chassis.control_arcade(.5);
       
-    }else{
+    // }else{
 
-      // Brain.Screen.print("Normal Mode");
-      // controllerPrint(2,"Normal Mode");
-      chassis.control_arcade(1);
-    }
+    //   // Brain.Screen.print("Normal Mode");
+    //   // controllerPrint(2,"Normal Mode");
+    //   chassis.control_arcade(1);
+    // }
+    chassis.control_arcade(1);
+
+    frontRight.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct); 
     // pls work
 
     
