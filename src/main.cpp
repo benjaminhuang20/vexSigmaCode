@@ -227,6 +227,21 @@ void controllerPrint(int screenLine, std::string controllerText) {
   }
 }
 
+bool ClampOn = false;
+void clampUpdate(){
+   if(ClampOn){
+      clampA = true;
+      clampB = false;
+ 
+    }else{
+      clampA = false;
+      clampB = true;
+    }
+  }
+
+
+
+
 void usercontrol(void) {
   // User control code here, inside the loop
   
@@ -237,45 +252,49 @@ void usercontrol(void) {
   bool ifTheButtonWithTheNameL2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
   bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
-  bool ClampOn = false;
-  bool SlowMode;
+
+  bool SlowMode = false;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
 
-
-
-
+  
+  clampUpdate;
+  Brain.Screen.setCursor(3,1);
+  Brain.Screen.print("Normal Mode");
+  Brain.Screen.setCursor(4,1);
+  Brain.Screen.print("Clamp Retracted");
 
 
 
   while (1) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
-    ControllerUpdate++;
-    if(ControllerUpdate == 20){
-      ControllerUpdate = 0;
-    }
-    OrderedUpdate = 0;
+    // ControllerUpdate++;
+    // if(ControllerUpdate == 20){
+    //   ControllerUpdate = 0;
+    // OrderedUpdate = 0;
+    // }
     if(SlowMode){
 
-      Brain.Screen.print("Slow Mode");
-      controllerPrint(2,"Slow Mode");
+      // Brain.Screen.print("Slow Mode");
+      // controllerPrint(2,"Slow Mode");
       chassis.control_arcade(.5);
       
     }else{
 
-      Brain.Screen.print("Normal Mode");
-      controllerPrint(2,"Normal Mode");
+      // Brain.Screen.print("Normal Mode");
+      // controllerPrint(2,"Normal Mode");
       chassis.control_arcade(1);
     }
     // pls work
 
     
-    Brain.Screen.clearScreen();
+    
     Brain.Screen.setCursor(1,1);
+    Brain.Screen.clearLine(1); 
     Brain.Screen.print("Battery: "), Brain.Screen.print(Brain.Battery.capacity());
-    Brain.Screen.setCursor(2,1);
-    Brain.Screen.print("- Functions -");
-    Brain.Screen.setCursor(3,1);
+    // Brain.Screen.setCursor(2,1);
+    // Brain.Screen.print("- Functions -");
+    // Brain.Screen.setCursor(3,1);
 
 
 
@@ -288,23 +307,25 @@ void usercontrol(void) {
     if(Controller.ButtonR2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleR2 == true){
         ClampOn = !ClampOn;
+        Brain.Screen.setCursor(4,1);
+        Controller.Screen.setCursor(2,1);
+        if (ClampOn){
+          Brain.Screen.print("Clamp Retracted");
+          Controller.Screen.print("Clamp Retracted");
+        }else{
+          Brain.Screen.clearLine(4,1);
+          Controller.Screen.clearLine(2);
+          Brain.Screen.print("Clamp Extended");
+          Controller.Screen.print("Clamp Extended");
+        }
+        clampUpdate;
         ToggleR2 = false;
       }
     }else{
       ToggleR2 = true;
     }
-    Brain.Screen.setCursor(4,1);
-    if(ClampOn){
-      clampA = true;
-      clampB = false;
-      Brain.Screen.print("Clamp Extended");
-      controllerPrint(1,"Clamp Extended");
-    }else{
-      clampA = false;
-      clampB = true;
-      Brain.Screen.print("Clamp Retracted");
-      controllerPrint(1,"Clamp Retracted");
-    }
+
+   
     //set clamp here
 
     if(Controller.ButtonX.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
@@ -339,8 +360,21 @@ void usercontrol(void) {
     if(ToggleA){
       SlowMode = !SlowMode;
       ToggleA = false;
+      Brain.Screen.setCursor(3,1); 
+      Brain.Screen.clearLine(3);  
+      Controller.Screen.clearLine(1);
+      Controller.Screen.setCursor(1,1); 
+      if(SlowMode){
+        Brain.Screen.print("Slow Mode");
+        Controller.Screen.print("Slow Mode");
+      } else{
+        Brain.Screen.print("Normal Mode");
+        Controller.Screen.print("Normal Mode");
+      }
+      
       
     }
+
     }else{
       ToggleA = true;
     }
