@@ -41,6 +41,7 @@ digital_out sweeperD = digital_out(Brain.ThreeWirePort.D);
 
 
 controller Controller; 
+
 void vexcodeInit( void ) {
   // nothing to initialize
 }

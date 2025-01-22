@@ -30,6 +30,8 @@ int gyro_port, float wheel_diameter, float wheel_ratio, float gyro_scale,
 int DriveLF_port, int DriveRF_port, int DriveLB_port, int DriveRB_port, 
 int ForwardTracker_port, float ForwardTracker_diameter, float ForwardTracker_center_distance, 
 int SidewaysTracker_port, float SidewaysTracker_diameter, float SidewaysTracker_center_distance) :
+
+
   wheel_diameter(wheel_diameter),
   wheel_ratio(wheel_ratio),
   gyro_scale(gyro_scale),
@@ -52,6 +54,7 @@ int SidewaysTracker_port, float SidewaysTracker_diameter, float SidewaysTracker_
   R_SidewaysTracker(SidewaysTracker_port),
   E_ForwardTracker(ThreeWire.Port[to_port(ForwardTracker_port)]),
   E_SidewaysTracker(ThreeWire.Port[to_port(SidewaysTracker_port)])
+  
 {
     if (drive_setup == TANK_ONE_FORWARD_ENCODER || drive_setup == TANK_ONE_FORWARD_ROTATION || drive_setup == ZERO_TRACKER_ODOM){
       odom.set_physical_distances(ForwardTracker_center_distance, 0);
@@ -688,9 +691,9 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
  * Default deadband is 5.
  */
 
-void Drive::control_arcade(){
-  float throttle = deadband(controller(primary).Axis3.value(), 5);
-  float turn = deadband(controller(primary).Axis1.value(), 5);
+void Drive::control_arcade(double DrivePower){
+  float throttle = deadband(controller(primary).Axis3.value()*DrivePower, 5);
+  float turn = deadband(controller(primary).Axis1.value()*DrivePower, 5);
   DriveL.spin(fwd, to_volt(throttle+turn), volt);
   DriveR.spin(fwd, to_volt(throttle-turn), volt);
 }

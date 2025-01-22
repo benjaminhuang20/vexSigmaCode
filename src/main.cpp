@@ -217,13 +217,14 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
   
 int ControllerUpdate;
+int OrderedUpdate;
 
 void controllerPrint(int screenLine, std::string controllerText) {
-  if (ControllerUpdate == 0) {
+  OrderedUpdate = OrderedUpdate + 2;
+  if (ControllerUpdate == OrderedUpdate) {
   Controller.Screen.setCursor(screenLine, 1);
   Controller.Screen.print(controllerText.c_str());
   }
-
 }
 
 void usercontrol(void) {
@@ -237,6 +238,7 @@ void usercontrol(void) {
   bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
   bool ClampOn = false;
+  bool SlowMode;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
 
@@ -245,17 +247,39 @@ void usercontrol(void) {
 
 
 
+
   while (1) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
-    chassis.control_arcade();
+    ControllerUpdate++;
+    if(ControllerUpdate == 20){
+      ControllerUpdate = 0;
+    }
+    OrderedUpdate = 0;
+    if(SlowMode){
+
+      Brain.Screen.print("Slow Mode");
+      controllerPrint(2,"Slow Mode");
+      chassis.control_arcade(.5);
+      
+    }else{
+
+      Brain.Screen.print("Normal Mode");
+      controllerPrint(2,"Normal Mode");
+      chassis.control_arcade(1);
+    }
+    // pls work
+
+    
     Brain.Screen.clearScreen();
     Brain.Screen.setCursor(1,1);
     Brain.Screen.print("Battery: "), Brain.Screen.print(Brain.Battery.capacity());
     Brain.Screen.setCursor(2,1);
     Brain.Screen.print("- Functions -");
+    Brain.Screen.setCursor(3,1);
 
-    controllerPrint(1,"happy");
 
+
+  
   
 
 
@@ -274,10 +298,12 @@ void usercontrol(void) {
       clampA = true;
       clampB = false;
       Brain.Screen.print("Clamp Extended");
+      controllerPrint(1,"Clamp Extended");
     }else{
       clampA = false;
       clampB = true;
       Brain.Screen.print("Clamp Retracted");
+      controllerPrint(1,"Clamp Retracted");
     }
     //set clamp here
 
@@ -308,8 +334,19 @@ void usercontrol(void) {
     }else{
       ToggleL2 = true;
     }
-    // pls work
 
+    if(Controller.ButtonA.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
+    if(ToggleA){
+      SlowMode = !SlowMode;
+      ToggleA = false;
+      
+    }
+    }else{
+      ToggleA = true;
+    }
+    
+    Brain.Screen.setCursor(5,1);
+    
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() * (-1) + Controller.ButtonL1.pressing()) * 1000;
     Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
