@@ -262,7 +262,7 @@ void usercontrol(void) {
   
   clampUpdate;
   Brain.Screen.setCursor(3,1);
-  Brain.Screen.print("Normal Mode");
+  Brain.Screen.print("Normal Mode yay fun time");
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
 
