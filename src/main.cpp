@@ -328,7 +328,7 @@ void usercontrol(void) {
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
-      chassis.control_arcade(.2);
+      chassis.control_arcade(.1);
       
     }else if(driveMode==0){
 
