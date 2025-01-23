@@ -259,6 +259,7 @@ void usercontrol(void) {
   bool SlowMode = false;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
+  int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
   // , arm2Start; 
 
@@ -351,18 +352,18 @@ void usercontrol(void) {
 
     if(Controller.ButtonL2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleL2){
-      ArmAngle++;
-      if(ArmAngle % 3 == 0){
-        Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      // ArmAngle++;
+      // if(ArmAngle % 3 == 0){
+      //   Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      //   // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
        
-      }else if(ArmAngle % 3 == 1){
-        Arm1.spinToPosition(90, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(90, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      }else{
-        Arm1.spinToPosition(180, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(180, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      }
+      // }else if(ArmAngle % 3 == 1){
+      //   Arm1.spinToPosition(100, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      //   // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      // }else{
+      //   Arm1.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      //   // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      // }
       Brain.Screen.print("Arm Toggled");
       ToggleL2 = false;
       
@@ -398,7 +399,10 @@ void usercontrol(void) {
     
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 1000;
+    int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
+    ArmAngleFinal = ArmAngleFinal + ArmSpeed;
     Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
+    Arm1.spinToPosition(ArmAngleFinal, rotationUnits::deg, 50, vex::velocityUnits::pct);
 
     
 
