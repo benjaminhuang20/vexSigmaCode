@@ -231,6 +231,7 @@ void controllerPrint(int screenLine, std::string controllerText) {
 
 bool ClampOn = false;
 void clampUpdate(){
+  
    if(ClampOn){
       clampA = true;
       clampB = false;
@@ -258,9 +259,11 @@ void usercontrol(void) {
   bool SlowMode = false;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
+  // int arm1Start = Arm1.
+  // , arm2Start; 
 
   
-  clampUpdate;
+  // clampUpdate;
   Brain.Screen.setCursor(3,1);
   Brain.Screen.print("Normal Mode yay fun time");
   Brain.Screen.setCursor(4,1);
@@ -279,7 +282,7 @@ void usercontrol(void) {
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
-      chassis.control_arcade(.1);
+      chassis.control_arcade(.2);
       
     }else{
 
@@ -326,7 +329,7 @@ void usercontrol(void) {
           Brain.Screen.print("Clamp Extended");
           Controller.Screen.print("Clamp Extended");
         }
-        clampUpdate;
+        // clampUpdate;
         ToggleR2 = false;
       }
     }else{
@@ -350,14 +353,15 @@ void usercontrol(void) {
     if(ToggleL2){
       ArmAngle++;
       if(ArmAngle % 3 == 0){
-        Arm1.spinToPosition(0, rotationUnits::deg, 0, vex::velocityUnits::pct);
-        Arm2.spinToPosition(0, rotationUnits::deg, 0, vex::velocityUnits::pct);
-      }else if(ArmAngle % 3 == 1){
         Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
         Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+       
+      }else if(ArmAngle % 3 == 1){
+        Arm1.spinToPosition(90, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(90, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }else{
-        Arm1.spinToPosition(0, rotationUnits::deg, 180, vex::velocityUnits::pct);
-        Arm2.spinToPosition(0, rotationUnits::deg, 180, vex::velocityUnits::pct);
+        Arm1.spinToPosition(180, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(180, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }
       Brain.Screen.print("Arm Toggled");
       ToggleL2 = false;
@@ -393,7 +397,7 @@ void usercontrol(void) {
     Brain.Screen.setCursor(5,1);
     
 
-    int IntakeSpeed = (Controller.ButtonR1.pressing() * (-1) + Controller.ButtonL1.pressing()) * 1000;
+    int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 1000;
     Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
 
     
