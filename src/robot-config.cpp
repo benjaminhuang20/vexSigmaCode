@@ -36,8 +36,8 @@ motor Intake = motor(PORT20, ratio6_1, true);
 digital_out clampA = digital_out(Brain.ThreeWirePort.A); 
 digital_out clampB = digital_out(Brain.ThreeWirePort.B); 
 
-digital_out sweeperC = digital_out(Brain.ThreeWirePort.C); 
-digital_out sweeperD = digital_out(Brain.ThreeWirePort.D); 
+digital_out sweeperA = digital_out(Brain.ThreeWirePort.C); 
+digital_out sweeperB = digital_out(Brain.ThreeWirePort.D); 
 
 
 controller Controller; 

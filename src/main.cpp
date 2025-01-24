@@ -124,6 +124,7 @@ void pre_auton() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   default_constants();
+  Arm1.resetPosition();
 
   while(!auto_started){
     // Brain.Screen.clearScreen();
@@ -229,18 +230,8 @@ void controllerPrint(int screenLine, std::string controllerText) {
   }
 }
 
-bool ClampOn = false;
-void clampUpdate(){
-  
-   if(ClampOn){
-      clampA = true;
-      clampB = false;
- 
-    }else{
-      clampA = false;
-      clampB = true;
-    }
-  }
+
+
 
 
 
@@ -257,6 +248,7 @@ void usercontrol(void) {
 
 
   bool SlowMode = false;
+  // bool DoinkerOn;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
   int ArmAngleFinal = 0;
@@ -269,7 +261,11 @@ void usercontrol(void) {
   Brain.Screen.print("Normal Mode yay fun time");
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
-
+  bool ClampOn = true;
+  sweeperA = true;
+  sweeperB = false;
+  clampA = true;
+  clampB = false;
 
 
   while (1) {
@@ -291,6 +287,7 @@ void usercontrol(void) {
       // controllerPrint(2,"Normal Mode");
       chassis.control_arcade(1);
     }
+   
 
 
     // chassis.control_arcade(1);
@@ -318,12 +315,15 @@ void usercontrol(void) {
 
     if(Controller.ButtonR2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleR2 == true){
-        ClampOn = !ClampOn;
+        clampA = !clampA;
+        clampB = !clampB;
+        ClampOn =!ClampOn;
         Brain.Screen.setCursor(4,1);
         Controller.Screen.setCursor(2,1);
-        if (ClampOn){
+        if (ClampOn == true){
           Brain.Screen.print("Clamp Retracted");
           Controller.Screen.print("Clamp Retracted");
+          
         }else{
           Brain.Screen.clearLine(4,1);
           Controller.Screen.clearLine(2);
@@ -342,7 +342,8 @@ void usercontrol(void) {
 
     if(Controller.ButtonX.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
       if(ToggleX){
-      //doinker
+        sweeperA = !sweeperA;
+        sweeperB = !sweeperB;
         Brain.Screen.print("Doinker Toggled");
         ToggleX = false;
       }
@@ -352,18 +353,23 @@ void usercontrol(void) {
 
     if(Controller.ButtonL2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleL2){
-      // ArmAngle++;
-      // if(ArmAngle % 3 == 0){
-      //   Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      //   // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      ArmAngle++;
+      if(ArmAngle % 3 == 0){
+        // Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        
+ 
        
-      // }else if(ArmAngle % 3 == 1){
-      //   Arm1.spinToPosition(100, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      //   // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      // }else{
-      //   Arm1.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      //   // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      // }
+      }else if(ArmAngle % 3 == 1){
+        // Arm1.spinToPosition(105, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(100.5, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      }else{
+        // Arm1.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+      }
       Brain.Screen.print("Arm Toggled");
       ToggleL2 = false;
       
@@ -399,10 +405,10 @@ void usercontrol(void) {
     
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 1000;
-    int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
-    ArmAngleFinal = ArmAngleFinal + ArmSpeed;
+    // int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
+    // ArmAngleFinal = ArmAngleFinal + ArmSpeed;
     Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
-    Arm1.spinToPosition(ArmAngleFinal, rotationUnits::deg, 50, vex::velocityUnits::pct);
+    // Arm1.spinToPosition(ArmAngleFinal, rotationUnits::deg, 50, vex::velocityUnits::pct);
 
     
 
