@@ -20,9 +20,9 @@ motor UpsidedownLeft = motor(PORT1, ratio6_1, false);
 
 motor_group chassisLeft = motor_group(frontLeft, MiddleLeft, UpsidedownLeft); 
 
-motor frontRight = motor(PORT7, ratio6_1, true); 
-motor MiddleRight = motor(PORT8, ratio6_1, true);
-motor UpsidedownRight = motor(PORT5, ratio6_1, false);
+motor frontRight = motor(PORT7, ratio6_1, false); 
+motor MiddleRight = motor(PORT8, ratio6_1, false);
+motor UpsidedownRight = motor(PORT5, ratio6_1, true);
 
 motor_group chassisRight = motor_group(frontRight, MiddleRight, UpsidedownRight);
 
@@ -31,7 +31,7 @@ motor Arm2 = motor(PORT19, ratio6_1, false);
 
 motor_group Arms = motor_group(Arm1, Arm2);
 
-motor Intake = motor(PORT20, ratio6_1, true);
+motor Intake = motor(PORT15, ratio6_1, true);
 
 digital_out clampA = digital_out(Brain.ThreeWirePort.A); 
 digital_out clampB = digital_out(Brain.ThreeWirePort.B); 

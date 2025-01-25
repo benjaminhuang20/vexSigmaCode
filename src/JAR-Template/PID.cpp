@@ -11,6 +11,8 @@
  * @param starti Maximum error to start integrating.
  */
 
+\
+
 PID::PID(float error, float kp, float ki, float kd, float starti) :
   error(error),
   kp(kp),
@@ -28,14 +30,21 @@ PID::PID(float error, float kp, float ki, float kd, float starti) :
  * than starti.
  * 
  * @param error Difference in desired and current position.
- * @param kp Proportional constant.
- * @param ki Integral constant.
- * @param kd Derivative constant.
+kp()
+ki()
+kd()
  * @param starti Maximum error to start integrating.
  * @param settle_error Maximum error to be considered settled.
  * @param settle_time Minimum time to be considered settled.
  * @param timeout Time after which to give up and move on.
  */
+
+// @param kp Proportional constant.
+// @param ki Integral constant.
+// @param kd Derivative constant.
+
+
+
 
 PID::PID(float error, float kp, float ki, float kd, float starti, 
 float settle_error, float settle_time, float timeout) :

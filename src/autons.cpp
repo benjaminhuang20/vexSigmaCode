@@ -12,8 +12,8 @@ void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, .4, .03, 3, 15);
-  chassis.set_swing_constants(12, .3, .001, 2, 15);
+  chassis.set_turn_constants(8, 15, .03, 3, 150);
+  chassis.set_swing_constants(8, .3, .001, 2, 15);
 
   // Each exit condition set is in the form of (settle_error, settle_time, timeout).
   chassis.set_drive_exit_conditions(1.5, 300, 5000);
@@ -41,12 +41,12 @@ void odom_constants(){
  */
 
 void drive_test(){
-  // chassis.drive_distance(6);
-  // chassis.drive_distance(12);
-  // chassis.drive_distance(18);
-  // chassis.drive_distance(-36);
+  chassis.drive_distance(6);
+  chassis.drive_distance(12);
+  chassis.drive_distance(18);
+  chassis.drive_distance(-36);
 
-  testMotor.spin(vex::directionType::fwd, 50, vex::velocityUnits::pct);
+  // testMotor.spin(vex::directionType::fwd, 50, vex::velocityUnits::pct);
 }
 
 /**

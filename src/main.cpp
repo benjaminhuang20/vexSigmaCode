@@ -109,7 +109,7 @@ PORT3,     -PORT4,
 
 );
 
-int current_auton_selection = 0;
+int current_auton_selection = 5;
 bool auto_started = false;
 
 /**
@@ -181,32 +181,34 @@ void pre_auton() {
 
 void autonomous(void) {
   auto_started = true;
-  switch(current_auton_selection){ 
-    case 0:
-      drive_test();
-      break;
-    case 1:         
-      drive_test();
-      break;
-    case 2:
-      turn_test();
-      break;
-    case 3:
-      swing_test();
-      break;
-    case 4:
-      full_test();
-      break;
-    case 5:
-      odom_test();
-      break;
-    case 6:
-      tank_odom_test();
-      break;
-    case 7:
-      holonomic_odom_test();
-      break;
- }
+
+  drive_test();
+//   switch(current_auton_selection){ 
+//     case 0:
+//       drive_test();
+//       break;
+//     case 1:         
+//       drive_test();
+//       break;
+//     case 2:
+//       turn_test();
+//       break;
+//     case 3:
+//       swing_test();
+//       break;
+//     case 4:
+//       full_test();
+//       break;
+//     case 5:
+//       odom_test();
+//       break;
+//     case 6:
+//       tank_odom_test();
+//       break;
+//     case 7:
+//       holonomic_odom_test();
+//       break;
+//  }
 }
 
 /*---------------------------------------------------------------------------*/
@@ -355,19 +357,19 @@ void usercontrol(void) {
     if(ToggleL2){
       ArmAngle++;
       if(ArmAngle % 3 == 0){
-        // Arm1.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm1.spinToPosition(0, rotationUnits::deg, 10, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
         
  
        
       }else if(ArmAngle % 3 == 1){
-        // Arm1.spinToPosition(105, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(100.5, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm1.spinToPosition(290, rotationUnits::deg, 100, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(100.5, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }else{
-        // Arm1.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
+        Arm1.spinToPosition(650, rotationUnits::deg, 30, vex::velocityUnits::pct);
+        // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }
       Brain.Screen.print("Arm Toggled");

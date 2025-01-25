@@ -25,14 +25,15 @@ using namespace vex;
  * @param SidewaysTracker_center_distance Vertical distance in inches.
  */
 
+
 Drive::Drive(enum ::drive_setup drive_setup, motor_group DriveL, motor_group DriveR,
              int gyro_port, float wheel_diameter, float wheel_ratio, float gyro_scale,
              int DriveLF_port, int DriveRF_port, int DriveLB_port, int DriveRB_port,
              int ForwardTracker_port, float ForwardTracker_diameter, float ForwardTracker_center_distance,
              int SidewaysTracker_port, float SidewaysTracker_diameter, float SidewaysTracker_center_distance) :
 
-                                                                                                                wheel_diameter(wheel_diameter),
-                                                                                                                wheel_ratio(wheel_ratio),
+                                                                                                                wheel_diameter(3),
+                                                                                                                wheel_ratio(0.8),
                                                                                                                 gyro_scale(gyro_scale),
                                                                                                                 drive_in_to_deg_ratio(wheel_ratio / 360.0 * M_PI * wheel_diameter),
                                                                                                                 ForwardTracker_center_distance(ForwardTracker_center_distance),
@@ -772,8 +773,8 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
 
 void Drive::control_arcade(double DrivePower)
 {
-  float throttle = deadband(controller(primary).Axis1.value() * DrivePower, 5);
-  float turn = deadband(controller(primary).Axis3.value() * DrivePower, 5);
+  float throttle = deadband(controller(primary).Axis3.value() * DrivePower, 5);
+  float turn = deadband(controller(primary).Axis1.value() * DrivePower, 5);
   DriveL.spin(fwd, to_volt(throttle + turn), volt);
   // chassisLeft.spin(fwd, to_volt(throttle+turn), volt);
   DriveR.spin(fwd, to_volt(throttle-turn), volt);
