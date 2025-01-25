@@ -104,6 +104,9 @@ public:
   void turn_to_angle(float angle, float turn_max_voltage, float turn_settle_error, float turn_settle_time, float turn_timeout, float turn_kp, float turn_ki, float turn_kd, float turn_starti);
 
   void drive_distance(float distance);
+  void tate_turn(float distance);
+  void tate_turn_negative(float distance);
+
   void drive_distance(float distance, float heading);
   void drive_distance(float distance, float heading, float drive_max_voltage, float heading_max_voltage);
   void drive_distance(float distance, float heading, float drive_max_voltage, float heading_max_voltage, float drive_settle_error, float drive_settle_time, float drive_timeout);

@@ -314,6 +314,27 @@ void Drive::drive_distance(float distance)
   drive_distance(distance, get_absolute_heading(), drive_max_voltage, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);
 }
 
+void Drive::tate_turn(float turn)
+{
+  DriveL.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+  DriveR.spin(directionType::fwd, -100, vex::velocityUnits::pct);
+  wait(turn*5, msec);
+  DriveL.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+  DriveR.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+
+}
+
+void Drive::tate_turn_negative(float turn)
+{
+  DriveL.spin(directionType::fwd, -100, vex::velocityUnits::pct);
+  DriveR.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+  wait(turn*5, msec);
+  DriveL.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+  DriveR.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+
+}
+
+
 void Drive::drive_distance(float distance, float heading)
 {
   drive_distance(distance, heading, drive_max_voltage, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);

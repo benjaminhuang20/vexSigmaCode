@@ -182,6 +182,7 @@ void pre_auton() {
 void autonomous(void) {
   auto_started = true;
 
+
   drive_test();
 //   switch(current_auton_selection){ 
 //     case 0:
@@ -227,8 +228,18 @@ int OrderedUpdate;
 void controllerPrint(int screenLine, std::string controllerText) {
   OrderedUpdate = OrderedUpdate + 2;
   if (ControllerUpdate == OrderedUpdate) {
+  Controller.Screen.clearLine(screenLine);
   Controller.Screen.setCursor(screenLine, 1);
   Controller.Screen.print(controllerText.c_str());
+  }
+}
+
+void controllerPrint2(int screenLine, float controllerText) {
+  OrderedUpdate = OrderedUpdate + 2;
+  if (ControllerUpdate == 0) {
+  Controller.Screen.clearLine(screenLine);
+  Controller.Screen.setCursor(screenLine, 1);
+  Controller.Screen.print(controllerText);
   }
 }
 
@@ -242,18 +253,18 @@ void usercontrol(void) {
   // User control code here, inside the loop
   
   // very useful variables, luckily cole can't delete them (he doesn't have edit access LLLLLLLLLLLL)
-  bool ifTheButtonWithTheNameAIsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
-  bool ifTheButtonWithTheNameXIsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
-  bool ifTheButtonWithTheNameR2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
-  bool ifTheButtonWithTheNameL2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
-  bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
+  // bool ifTheButtonWithTheNameAIsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
+  // bool ifTheButtonWithTheNameXIsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
+  // bool ifTheButtonWithTheNameR2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
+  // bool ifTheButtonWithTheNameL2IsPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
+  // bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
 
   bool SlowMode = false;
   // bool DoinkerOn;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
   int ArmAngle = 0;
-  int ArmAngleFinal = 0;
+  // int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
  
 
@@ -264,19 +275,19 @@ void usercontrol(void) {
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
   bool ClampOn = true;
-  sweeperA = true;
-  sweeperB = false;
-  clampA = true;
-  clampB = false;
+  sweeperA = false;
+  sweeperB = true;
+  // clampA = true;
+  // clampB = false;
 
 
   while (1) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
     // ControllerUpdate++;
-    // if(ControllerUpdate == 20){
-    //   ControllerUpdate = 0;
-    // OrderedUpdate = 0;
-    // }
+    if(ControllerUpdate == 20){
+      ControllerUpdate = 0;
+    OrderedUpdate = 0;
+    }
     if(SlowMode){
 
       // Brain.Screen.print("Slow Mode");
@@ -303,11 +314,22 @@ void usercontrol(void) {
     Brain.Screen.setCursor(1,1);
     Brain.Screen.clearLine(1); 
     Brain.Screen.print("Battery: "), Brain.Screen.print(Brain.Battery.capacity());
+    
+    float averageDriveTemp = 
+    frontRight.temperature(temperatureUnits::fahrenheit) + 
+    MiddleRight.temperature(temperatureUnits::fahrenheit) + 
+    UpsidedownRight.temperature(temperatureUnits::fahrenheit) + 
+    frontLeft.temperature(temperatureUnits::fahrenheit) + 
+    MiddleLeft.temperature(temperatureUnits::fahrenheit) + 
+    UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
+    averageDriveTemp=averageDriveTemp/6;
+    controllerPrint2(3,averageDriveTemp);
     // Brain.Screen.setCursor(2,1);
     // Brain.Screen.print("- Functions -");
     // Brain.Screen.setCursor(3,1);
 
 
+    
 
   
   
@@ -356,19 +378,19 @@ void usercontrol(void) {
     if(Controller.ButtonL2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleL2){
       ArmAngle++;
-      if(ArmAngle % 3 == 0){
+      if(ArmAngle % 2 == 0){
         Arm1.spinToPosition(0, rotationUnits::deg, 10, vex::velocityUnits::pct);
         // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
         
  
        
-      }else if(ArmAngle % 3 == 1){
-        Arm1.spinToPosition(290, rotationUnits::deg, 100, vex::velocityUnits::pct);
+      }else if(ArmAngle % 2 == 1){
+        Arm1.spinToPosition(700, rotationUnits::deg, 300, vex::velocityUnits::pct);
         // Arm2.spinToPosition(100.5, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }else{
-        Arm1.spinToPosition(650, rotationUnits::deg, 30, vex::velocityUnits::pct);
+        Arm1.spinToPosition(0, rotationUnits::deg, 30, vex::velocityUnits::pct);
         // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
         // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
       }
