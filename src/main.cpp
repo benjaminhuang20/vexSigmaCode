@@ -255,7 +255,7 @@ void usercontrol(void) {
   int ArmAngle = 0;
   int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
-  // , arm2Start; 
+ 
 
   
   // clampUpdate;
