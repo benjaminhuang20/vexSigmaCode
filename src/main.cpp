@@ -260,9 +260,9 @@ void usercontrol(void) {
   // bool ifTheButtonWithTheNameYAndBAreBothPressedThisVariableActsAsAToggleSoItDoesntFireMultipleTimesThisTechniqueIsSeenInVERYSQUISHYSEALSScratchGamesGoToHisProfileIfThisVariableDoesntExplainWellEnoughAlthoughVERYSQUISHYSEALsProfileDoesNotActuallyExplainItAndYouNeedToGoIntoHisScratchGameWhichHasNoCommentsAndShortVariableNamesAndFindItBecauseYay;
 
 
-  bool SlowMode = false;
+  int driveMode = 0;
   // bool DoinkerOn;
-  bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false;
+  bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false, ToggleBY = false;
   int ArmAngle = 0;
   // int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
@@ -274,11 +274,12 @@ void usercontrol(void) {
   Brain.Screen.print("Normal Mode yay fun time");
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
-  bool ClampOn = true;
+  bool ClampOn = false;
   sweeperA = false;
   sweeperB = true;
-  // clampA = true;
-  // clampB = false;
+  clampA = false;
+  clampB = true;
+
 
 
   while (1) {
@@ -288,17 +289,18 @@ void usercontrol(void) {
       ControllerUpdate = 0;
     OrderedUpdate = 0;
     }
-    if(SlowMode){
+    if(driveMode=1){
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
       chassis.control_arcade(.2);
       
-    }else{
+    }else if(driveMode=0){
 
       // Brain.Screen.print("Normal Mode");
       // controllerPrint(2,"Normal Mode");
       chassis.control_arcade(1);
+    }else{
     }
    
 
@@ -324,6 +326,17 @@ void usercontrol(void) {
     UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
     averageDriveTemp=averageDriveTemp/6;
     controllerPrint2(3,averageDriveTemp);
+    
+    if(ControllerUpdate=4){
+    Brain.Screen.clearLine(9);
+    Brain.Screen.setCursor(9,1);
+    Brain.Screen.print("Drive Temp: ");
+    Brain.Screen.print(averageDriveTemp);
+    Brain.Screen.clearLine(10);
+    Brain.Screen.setCursor(10,1);
+    Brain.Screen.print("Intake Temp: ");
+    Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit));
+    }
     // Brain.Screen.setCursor(2,1);
     // Brain.Screen.print("- Functions -");
     // Brain.Screen.setCursor(3,1);
@@ -404,18 +417,19 @@ void usercontrol(void) {
 
     if(Controller.ButtonA.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleA){
-      SlowMode = !SlowMode;
       ToggleA = false;
       Brain.Screen.setCursor(3,1); 
       Brain.Screen.clearLine(3);  
       Controller.Screen.clearLine(1);
       Controller.Screen.setCursor(1,1); 
-      if(SlowMode){
-        Brain.Screen.print("Slow Mode");
-        Controller.Screen.print("Slow Mode");
-      } else{
+      if(driveMode>0){
         Brain.Screen.print("Normal Mode");
         Controller.Screen.print("Normal Mode");
+        driveMode = 0;
+      } else{
+        Brain.Screen.print("Slow Mode");
+        Controller.Screen.print("Slow Mode");
+        driveMode = 1;
       }
       
       
@@ -423,6 +437,17 @@ void usercontrol(void) {
 
     }else{
       ToggleA = true;
+    }
+
+    if(Controller.ButtonB.pressing()&&Controller.ButtonY.pressing()){
+      if(ToggleBY){
+      Brain.Screen.print("LOCKED MODE");
+      Controller.Screen.print("LOCKED MODE");
+      driveMode = 2;
+      ToggleBY = true;
+      }
+    }else{
+      ToggleBY = false;
     }
     
     Brain.Screen.setCursor(5,1);

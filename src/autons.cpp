@@ -49,6 +49,7 @@ void drive_test(){
   clampA = false;
   clampB = true;
   chassis.drive_distance(-4);
+  wait(1,sec);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
   wait(3,sec);
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
