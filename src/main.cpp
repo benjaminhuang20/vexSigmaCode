@@ -244,6 +244,37 @@ void controllerPrint2(int screenLine, float controllerText) {
 }
 
 
+bool warnBattery = false;
+bool warnTemp = false;
+float averageDriveTemp;
+
+void updateFunctions (){
+    averageDriveTemp = 
+    frontRight.temperature(temperatureUnits::fahrenheit) + 
+    MiddleRight.temperature(temperatureUnits::fahrenheit) + 
+    UpsidedownRight.temperature(temperatureUnits::fahrenheit) + 
+    frontLeft.temperature(temperatureUnits::fahrenheit) + 
+    MiddleLeft.temperature(temperatureUnits::fahrenheit) + 
+    UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
+    averageDriveTemp=averageDriveTemp/6;
+    controllerPrint2(3,averageDriveTemp);
+      if(Brain.Battery.capacity()<20){
+        if(warnBattery == false){
+        Controller.rumble(". . .");
+        warnBattery = true;
+        }
+      }else{
+        warnBattery = false;
+      }
+      if(averageDriveTemp>115){
+        if(warnTemp == false){
+        Controller.rumble("- - -");
+        warnTemp = true;
+        }
+      }else{
+        warnTemp = false;
+      }
+}
 
 
 
@@ -279,6 +310,9 @@ void usercontrol(void) {
   sweeperB = true;
   clampA = false;
   clampB = true;
+ 
+
+  
 
 
 
@@ -287,15 +321,16 @@ void usercontrol(void) {
     // ControllerUpdate++;
     if(ControllerUpdate == 20){
       ControllerUpdate = 0;
+      updateFunctions;
     OrderedUpdate = 0;
     }
-    if(driveMode=1){
+    if(driveMode==1){
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
       chassis.control_arcade(.2);
       
-    }else if(driveMode=0){
+    }else if(driveMode==0){
 
       // Brain.Screen.print("Normal Mode");
       // controllerPrint(2,"Normal Mode");
@@ -317,17 +352,9 @@ void usercontrol(void) {
     Brain.Screen.clearLine(1); 
     Brain.Screen.print("Battery: "), Brain.Screen.print(Brain.Battery.capacity());
     
-    float averageDriveTemp = 
-    frontRight.temperature(temperatureUnits::fahrenheit) + 
-    MiddleRight.temperature(temperatureUnits::fahrenheit) + 
-    UpsidedownRight.temperature(temperatureUnits::fahrenheit) + 
-    frontLeft.temperature(temperatureUnits::fahrenheit) + 
-    MiddleLeft.temperature(temperatureUnits::fahrenheit) + 
-    UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
-    averageDriveTemp=averageDriveTemp/6;
-    controllerPrint2(3,averageDriveTemp);
+
     
-    if(ControllerUpdate=4){
+    if(ControllerUpdate == 4){
     Brain.Screen.clearLine(9);
     Brain.Screen.setCursor(9,1);
     Brain.Screen.print("Drive Temp: ");
@@ -422,14 +449,18 @@ void usercontrol(void) {
       Brain.Screen.clearLine(3);  
       Controller.Screen.clearLine(1);
       Controller.Screen.setCursor(1,1); 
-      if(driveMode>0){
+      if(driveMode==0){
+        driveMode=1;
+      }else{
+        driveMode=0;
+      }
+
+      if(driveMode==0){
         Brain.Screen.print("Normal Mode");
         Controller.Screen.print("Normal Mode");
-        driveMode = 0;
-      } else{
+      }else{
         Brain.Screen.print("Slow Mode");
         Controller.Screen.print("Slow Mode");
-        driveMode = 1;
       }
       
       
@@ -441,13 +472,17 @@ void usercontrol(void) {
 
     if(Controller.ButtonB.pressing()&&Controller.ButtonY.pressing()){
       if(ToggleBY){
+      Brain.Screen.setCursor(3,1); 
+      Brain.Screen.clearLine(3);  
+      Controller.Screen.clearLine(1);
+      Controller.Screen.setCursor(1,1); 
       Brain.Screen.print("LOCKED MODE");
       Controller.Screen.print("LOCKED MODE");
       driveMode = 2;
-      ToggleBY = true;
+      ToggleBY = false;
       }
     }else{
-      ToggleBY = false;
+      ToggleBY = true;
     }
     
     Brain.Screen.setCursor(5,1);
