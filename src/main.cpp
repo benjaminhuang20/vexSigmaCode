@@ -286,7 +286,7 @@ void usercontrol(void) {
   sweeperA = false;
   sweeperB = true;
   clampA = false;
-  clampB = true;
+  clampB = true; //yay yay
  
 
   
