@@ -281,7 +281,7 @@ void usercontrol(void) {
   Controller.Screen.setCursor(1, 1),Controller.Screen.print("Normal Mode");
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
-    Controller.Screen.setCursor(1, 1),Controller.Screen.print("Clamp Retracted");
+  Controller.Screen.setCursor(2, 1),Controller.Screen.print("Clamp Retracted");
   bool ClampOn = false;
   sweeperA = false;
   sweeperB = true;
