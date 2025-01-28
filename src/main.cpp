@@ -249,6 +249,7 @@ bool warnTemp = false;
 float averageDriveTemp;
 
 void updateFunctions (){
+    Brain.Screen.print("Update");
     averageDriveTemp = 
     frontRight.temperature(temperatureUnits::fahrenheit) + 
     MiddleRight.temperature(temperatureUnits::fahrenheit) + 
@@ -257,7 +258,20 @@ void updateFunctions (){
     MiddleLeft.temperature(temperatureUnits::fahrenheit) + 
     UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
     averageDriveTemp=averageDriveTemp/6;
-    controllerPrint2(3,averageDriveTemp);
+    Controller.Screen.clearLine(3);
+    Controller.Screen.setCursor(3, 1);
+    Controller.Screen.print(averageDriveTemp);
+    Controller.Screen.print(" F");
+    Brain.Screen.clearLine(9);
+    Brain.Screen.setCursor(9,1);
+    Brain.Screen.print("Drive Temp: ");
+    Brain.Screen.print(averageDriveTemp);
+    Brain.Screen.print(" F");
+    Brain.Screen.clearLine(10);
+    Brain.Screen.setCursor(10,1);
+    Brain.Screen.print("Intake Temp: ");
+    Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit));
+
       if(Brain.Battery.capacity()<20){
         if(warnBattery == false){
         Controller.rumble(". . .");
@@ -322,7 +336,7 @@ void usercontrol(void) {
     if(ControllerUpdate == 20){
       ControllerUpdate = 0;
       updateFunctions;
-    OrderedUpdate = 0;
+      OrderedUpdate = 0;
     }
     if(driveMode==1){
 
@@ -354,16 +368,7 @@ void usercontrol(void) {
     
 
     
-    if(ControllerUpdate == 4){
-    Brain.Screen.clearLine(9);
-    Brain.Screen.setCursor(9,1);
-    Brain.Screen.print("Drive Temp: ");
-    Brain.Screen.print(averageDriveTemp);
-    Brain.Screen.clearLine(10);
-    Brain.Screen.setCursor(10,1);
-    Brain.Screen.print("Intake Temp: ");
-    Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit));
-    }
+
     // Brain.Screen.setCursor(2,1);
     // Brain.Screen.print("- Functions -");
     // Brain.Screen.setCursor(3,1);

@@ -45,7 +45,7 @@ Drive::Drive(enum ::drive_setup drive_setup, motor_group DriveL, motor_group Dri
                                                                                                                 drive_setup(drive_setup),
                                                                                                                 DriveL(DriveL),
                                                                                                                 DriveR(DriveR),
-                                                                                                                Gyro(inertial(gyro_port)),
+                                                                                                                Gyro(inertial(20)),
                                                                                                                 DriveLF(abs(DriveLF_port), is_reversed(DriveLF_port)),
                                                                                                                 DriveRF(abs(DriveRF_port), is_reversed(DriveRF_port)),
                                                                                                                 DriveLB(abs(DriveLB_port), is_reversed(DriveLB_port)),

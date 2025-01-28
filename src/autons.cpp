@@ -41,18 +41,31 @@ void odom_constants(){
  */
 
 void drive_test(){
-  sweeperA = false;
-  sweeperB = true;
-  clampA = true;
-  clampB = false;
-  chassis.drive_distance(-24);
-  clampA = false;
-  clampB = true;
-  chassis.drive_distance(-4);
-  wait(1,sec);
-  Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
-  wait(3,sec);
-  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+    chassis.turn_to_angle(5);
+  chassis.turn_to_angle(30);
+  chassis.turn_to_angle(90);
+  chassis.turn_to_angle(225);
+  chassis.turn_to_angle(0);
+  // sweeperA = false;
+  // sweeperB = true;
+  // clampA = true;
+  // clampB = false;
+  // chassis.drive_distance(-24);
+  // clampA = false;
+  // clampB = true;
+  // chassis.drive_distance(-4);
+  // wait(1,sec);
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+  // wait(3,sec);
+  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+
+
+
+  // chassisLeft.spinFor(vex::directionType::fwd, 50, vex::rotationUnits::deg, false); 
+  // chassisRight.spinFor(vex::directionType::fwd, 50, vex::rotationUnits::deg); 
+
+
+  // chassisLeft.spinFor(1, ); 
   // chassis.tate_turn(60); 
   // chassis.drive_distance(14);
   // chassis.tate_turn_negative(90);
