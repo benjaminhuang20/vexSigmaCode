@@ -278,8 +278,10 @@ void usercontrol(void) {
   // clampUpdate;
   Brain.Screen.setCursor(3,1);
   Brain.Screen.print("Normal Mode");
+  Controller.Screen.setCursor(1, 1),Controller.Screen.print("Normal Mode");
   Brain.Screen.setCursor(4,1);
   Brain.Screen.print("Clamp Retracted");
+    Controller.Screen.setCursor(1, 1),Controller.Screen.print("Clamp Retracted");
   bool ClampOn = false;
   sweeperA = false;
   sweeperB = true;
@@ -294,7 +296,9 @@ void usercontrol(void) {
   while (1) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
     ControllerUpdate++;
-    
+    // Brain.Screen.setCursor(2,1);
+    // Brain.Screen.clearLine(2);
+    // Brain.Screen.print(ControllerUpdate);
     if(ControllerUpdate == 40){
     OrderedUpdate = 0;
     ControllerUpdate = 0;
@@ -330,7 +334,7 @@ void usercontrol(void) {
       }else{
         warnTemp = false;
       }
-            if(averageDriveTemp>120){
+      if(averageDriveTemp>120){
         if(warnTemp2 == false){
         Controller.rumble("-.-.-");
         Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("TEMP WARNING 120F");
@@ -394,13 +398,13 @@ void usercontrol(void) {
         ClampOn =!ClampOn;
         Brain.Screen.setCursor(4,1);
         Controller.Screen.setCursor(2,1);
+        Brain.Screen.clearLine(4,1);
+        Controller.Screen.clearLine(2);
         if (ClampOn == true){
           Brain.Screen.print("Clamp Retracted");
           Controller.Screen.print("Clamp Retracted");
           
         }else{
-          Brain.Screen.clearLine(4,1);
-          Controller.Screen.clearLine(2);
           Brain.Screen.print("Clamp Extended");
           Controller.Screen.print("Clamp Extended");
         }
@@ -487,7 +491,7 @@ void usercontrol(void) {
       Controller.Screen.clearLine(1);
       Controller.Screen.setCursor(1,1); 
       ToggleBY = false;
-      if(driveMode=2){
+      if(driveMode==2){
         Brain.Screen.print("CONTROL LOCK");
         Controller.Screen.print("CONTROL LOCK");
         driveMode = 2;
