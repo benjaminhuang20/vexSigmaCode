@@ -12,13 +12,15 @@ void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(8, 15, .03, 3, 150);
+  chassis.set_turn_constants(8, .1, 0, 0, 0);
   chassis.set_swing_constants(8, .3, .001, 2, 15);
 
   // Each exit condition set is in the form of (settle_error, settle_time, timeout).
-  chassis.set_drive_exit_conditions(1.5, 300, 5000);
-  chassis.set_turn_exit_conditions(1, 300, 3000);
-  chassis.set_swing_exit_conditions(1, 300, 3000);
+  // chassis.set_drive_exit_conditions(1.5, 300, 5000);
+  chassis.set_drive_exit_conditions(1, 0, 0);
+  chassis.set_turn_exit_conditions(1, 300, 0);
+  // chassis.set_swing_exit_conditions(1, 300, 3000);
+  chassis.set_swing_exit_conditions(1, 0, 0);
 }
 
 /**
@@ -41,11 +43,30 @@ void odom_constants(){
  */
 
 void drive_test(){
-    chassis.turn_to_angle(5);
-  chassis.turn_to_angle(30);
-  chassis.turn_to_angle(90);
-  chassis.turn_to_angle(225);
-  chassis.turn_to_angle(0);
+  sweeperA = false;
+  sweeperB = true;
+  clampA = true;
+  clampB = false;
+  chassis.drive_distance(-30);
+  // Brain.Screen.print
+
+  chassis.turn_to_angle(-45);
+
+  chassis.drive_distance(-10);
+  clampA = false;
+  clampB = true;
+  chassis.drive_distance(10);
+
+
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+  // chassis.drive_distance(24);
+  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
+  // chassis.turn_to_angle(-45);
+  // chassis.drive_distance(24);
+  // sweeperB = false;
+  // sweeperB = true;
+  
+
   // sweeperA = false;
   // sweeperB = true;
   // clampA = true;

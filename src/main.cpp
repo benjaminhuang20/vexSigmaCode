@@ -54,7 +54,7 @@ motor_group(frontLeft, MiddleLeft, UpsidedownLeft),
 motor_group(frontRight, MiddleRight, UpsidedownRight),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT1,
+PORT20,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
 3.25,
@@ -248,8 +248,8 @@ bool warnBattery = false;
 bool warnTemp = false;
 float averageDriveTemp;
 
-void updateFunctions (){
-    Brain.Screen.print("Update");
+void updateFunctions(){
+    Brain.Screen.print("yay");
     averageDriveTemp = 
     frontRight.temperature(temperatureUnits::fahrenheit) + 
     MiddleRight.temperature(temperatureUnits::fahrenheit) + 
@@ -333,9 +333,11 @@ void usercontrol(void) {
   while (1) {
     // MAIN LOOOOOOOOP (SWEAL THE SEAL IS THE BESTEST SEAL COLE DID YOU SEE THIS)
     // ControllerUpdate++;
-    if(ControllerUpdate == 20){
+    if(ControllerUpdate = 20){
       ControllerUpdate = 0;
       updateFunctions;
+      Brain.Screen.clearLine(2);
+      Brain.Screen.setCursor(2,1);
       OrderedUpdate = 0;
     }
     if(driveMode==1){

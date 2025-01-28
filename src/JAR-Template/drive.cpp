@@ -45,7 +45,7 @@ Drive::Drive(enum ::drive_setup drive_setup, motor_group DriveL, motor_group Dri
                                                                                                                 drive_setup(drive_setup),
                                                                                                                 DriveL(DriveL),
                                                                                                                 DriveR(DriveR),
-                                                                                                                Gyro(inertial(20)),
+                                                                                                                Gyro(inertial(gyro_port)),
                                                                                                                 DriveLF(abs(DriveLF_port), is_reversed(DriveLF_port)),
                                                                                                                 DriveRF(abs(DriveRF_port), is_reversed(DriveRF_port)),
                                                                                                                 DriveLB(abs(DriveLB_port), is_reversed(DriveLB_port)),
@@ -288,12 +288,13 @@ void Drive::turn_to_angle(float angle, float turn_max_voltage, float turn_settle
 {
   PID turnPID(reduce_negative_180_to_180(angle - get_absolute_heading()), turn_kp, turn_ki, turn_kd, turn_starti, turn_settle_error, turn_settle_time, turn_timeout);
   while (!turnPID.is_settled())
+  // while(std::abs(angle - get_absolute_heading()) <= 5)
   {
     float error = reduce_negative_180_to_180(angle - get_absolute_heading());
     float output = turnPID.compute(error);
     output = clamp(output, -turn_max_voltage, turn_max_voltage);
     drive_with_voltage(output, -output);
-    task::sleep(10);
+    // task::sleep(10);
   }
 }
 
