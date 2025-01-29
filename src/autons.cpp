@@ -57,21 +57,15 @@ void odom_constants(){
  * The expected behavior is to return to the start position.
  */
 
-void drive_test(){
+void goalRushBlue(){
   sweeperA = false;
   sweeperB = true;
   clampA = true;
   clampB = false;
   chassis.drive_distance(-25);
-  // Brain.Screen.print
-
- 
-  //GRAB FIRST GOAL
   chassis.turn_to_angle(0);
   vex::task::sleep(300);
   chassis.turn_to_angle(-40);
-
-
   chassis.drive_distance(-18.5);
   clampA = false;
   clampB = true;
@@ -97,62 +91,41 @@ void drive_test(){
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
   chassis.turn_to_angle(145);
   chassis.drive_distance(17);
-
-  
-
-  // vex::wait(300);
-  // chassis.turn_to_angle(-43);
-
-  // chassis.drive_distance(13.5);
-
-
-  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
-  // chassis.drive_distance(24);
-  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
-  // chassis.turn_to_angle(-45);
-  // chassis.drive_distance(24);
-  // sweeperB = false;
-  // sweeperB = true;
-  
-
-  // sweeperA = false;
-  // sweeperB = true;
-  // clampA = true;
-  // clampB = false;
-  // chassis.drive_distance(-24);
-  // clampA = false;
-  // clampB = true;
-  // chassis.drive_distance(-4);
-  // wait(1,sec);
-  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
-  // wait(3,sec);
-  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
-
-
-
-  // chassisLeft.spinFor(vex::directionType::fwd, 50, vex::rotationUnits::deg, false); 
-  // chassisRight.spinFor(vex::directionType::fwd, 50, vex::rotationUnits::deg); 
-
-
-  // chassisLeft.spinFor(1, ); 
-  // chassis.tate_turn(60); 
-  // chassis.drive_distance(14);
-  // chassis.tate_turn_negative(90);
-  // chassis.drive_distance(4);
-  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
-  // chassis.drive_distance(20);
-  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct);
-  // clampA = true;
-  // clampB = false;
-  // chassis.tate_turn_negative(90);
-  // chassis.drive_distance(12);
-
-  //chassis.tate_turn
+}
+void goalRushRed(){
   sweeperA = false;
   sweeperB = true;
-
-
-
+  clampA = true;
+  clampB = false;
+  chassis.drive_distance(-25);
+  chassis.turn_to_angle(0);
+  vex::task::sleep(300);
+  chassis.turn_to_angle(40);
+  chassis.drive_distance(-18.5);
+  clampA = false;
+  clampB = true;
+  vex::task::sleep(300);
+  Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  chassis.drive_distance(5);
+  chassis.turn_to_angle(-35);
+  chassis.drive_distance(15);
+  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  vex::task::sleep(300); 
+  chassis.turn_to_angle(180);
+  chassis.drive_distance(-25);
+  clampA = true;
+  clampB = false;
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(90);
+  chassis.drive_distance(-20);
+  clampA = false;
+  clampB = true;
+  vex::task::sleep(100);
+  Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  vex::task::sleep(1300); 
+  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  chassis.turn_to_angle(215);
+  chassis.drive_distance(17);
 }
 
 /**

@@ -184,7 +184,7 @@ void autonomous(void) {
 
 
   // turn_test();
-  drive_test();
+  goalRushRed();
 //   switch(current_auton_selection){ 
 //     case 0:
 //       drive_test();
@@ -371,6 +371,7 @@ void usercontrol(void) {
       // controllerPrint(2,"Normal Mode");
       chassis.control_arcade(1);
     }else{
+      chassis.control_arcade(0);
     }
    
 
@@ -504,13 +505,13 @@ void usercontrol(void) {
       Controller.Screen.setCursor(1,1); 
       ToggleBY = false;
       if(driveMode==2){
-        Brain.Screen.print("CONTROL LOCK");
-        Controller.Screen.print("CONTROL LOCK");
-        driveMode = 2;
-        }else{
           Brain.Screen.print("Normal Mode");
           Controller.Screen.print("Normal Mode");
           driveMode = 0;
+        }else{
+          Brain.Screen.print("CONTROL LOCK");
+          Controller.Screen.print("CONTROL LOCK");
+          driveMode = 2;
         }
       }
     }else{
