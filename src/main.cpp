@@ -183,6 +183,7 @@ void autonomous(void) {
   auto_started = true;
 
 
+  // turn_test();
   drive_test();
 //   switch(current_auton_selection){ 
 //     case 0:
@@ -247,7 +248,9 @@ void controllerPrint2(int screenLine, float controllerText) {
 bool warnBattery = false;
 bool warnTemp = false;
 bool warnTemp2 = false;
+bool warnTemp3 = false;
 float averageDriveTemp;
+
 
 
 
@@ -313,7 +316,6 @@ void usercontrol(void) {
     Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(averageDriveTemp),Controller.Screen.print(" F");
     Brain.Screen.clearLine(9),Brain.Screen.setCursor(9,1),Brain.Screen.print("Drive Temp: "),Brain.Screen.print(averageDriveTemp),Brain.Screen.print(" F");
     Brain.Screen.clearLine(10),Brain.Screen.setCursor(10,1),Brain.Screen.print("Intake Temp: "),Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit)), Brain.Screen.print(" F");
-
       if(Brain.Battery.capacity()<20){
         if(warnBattery == false){
         Controller.rumble(". . .");
@@ -327,7 +329,7 @@ void usercontrol(void) {
       if(averageDriveTemp>110){
         if(warnTemp == false){
         Controller.rumble("- - -");
-        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("TEMP WARNING 110F");
+        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("TEMP 110F");
         ControllerUpdate=-100;
         warnTemp = true;
         }
@@ -337,12 +339,22 @@ void usercontrol(void) {
       if(averageDriveTemp>120){
         if(warnTemp2 == false){
         Controller.rumble("-.-.-");
-        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("TEMP WARNING 120F");
+        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("HIGH TEMP 120F");
         ControllerUpdate=-100;
         warnTemp2 = true;
         }
       }else{
         warnTemp2 = false;
+      }
+      if(averageDriveTemp>130){
+        if(warnTemp3 == false){
+        Controller.rumble(".....");
+        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("VERY HIGH TEMP 130F");
+        ControllerUpdate=-100;
+        warnTemp3 = true;
+        }
+      }else{
+        warnTemp3 = false;
       }
 
       

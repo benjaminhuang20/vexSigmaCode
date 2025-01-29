@@ -136,7 +136,7 @@ bool PID::is_settled(){
     return(true);
   } // If timeout does equal 0, the move will never actually time out. Setting timeout to 0 is the 
     // equivalent of setting it to infinity.
-  if (time_spent_settled>settle_time){
+  if (time_spent_settled > settle_time){
     return(true);
   }
   return(false);

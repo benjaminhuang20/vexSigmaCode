@@ -12,15 +12,30 @@ void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(8, .1, 0, 0, 0);
+  chassis.set_turn_constants(8, .075, 0, 0, 0);
   chassis.set_swing_constants(8, .3, .001, 2, 15);
 
   // Each exit condition set is in the form of (settle_error, settle_time, timeout).
   // chassis.set_drive_exit_conditions(1.5, 300, 5000);
-  chassis.set_drive_exit_conditions(1, 0, 0);
-  chassis.set_turn_exit_conditions(1, 300, 0);
+  // chassis.set_drive_exit_conditions(1, 0, 0);
+  // chassis.set_turn_exit_conditions(1, 300,3000); //-------------------------
+  // // chassis.set_swing_exit_conditions(1, 300, 3000);
+  // chassis.set_swing_exit_conditions(1, 0, 0);
+
+  
+  // chassis.set_drive_constants(10, 1.5, 0, 10, 0);
+  // chassis.set_heading_constants(6, .4, 0, 1, 0);
+  // chassis.set_turn_constants(12, .1, .03, 1, 15);
+  // chassis.set_swing_constants(12, .3, .001, 2, 15);
+
+  // Each exit condition set is in the form of (settle_error, settle_time, timeout).
+  // chassis.set_drive_exit_conditions(1.5, 300, 5000);
+  // chassis.set_turn_exit_conditions(1, 300, 3000);
   // chassis.set_swing_exit_conditions(1, 300, 3000);
-  chassis.set_swing_exit_conditions(1, 0, 0);
+  chassis.set_drive_exit_conditions(1.5, 300, 5000);
+  chassis.set_turn_exit_conditions(1, 300, 1000);
+  chassis.set_swing_exit_conditions(1, 300, 3000);
+
 }
 
 /**
@@ -47,15 +62,48 @@ void drive_test(){
   sweeperB = true;
   clampA = true;
   clampB = false;
-  chassis.drive_distance(-30);
+  chassis.drive_distance(-25);
   // Brain.Screen.print
 
-  chassis.turn_to_angle(-45);
+ 
+  //GRAB FIRST GOAL
+  chassis.turn_to_angle(0);
+  vex::task::sleep(300);
+  chassis.turn_to_angle(-40);
 
-  chassis.drive_distance(-10);
+
+  chassis.drive_distance(-18.5);
   clampA = false;
   clampB = true;
-  chassis.drive_distance(10);
+  vex::task::sleep(300);
+  Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  chassis.drive_distance(5);
+  chassis.turn_to_angle(35);
+  chassis.drive_distance(15);
+  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  vex::task::sleep(300); 
+  chassis.turn_to_angle(180);
+  chassis.drive_distance(-25);
+  clampA = true;
+  clampB = false;
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(-90);
+  chassis.drive_distance(-20);
+  clampA = false;
+  clampB = true;
+  vex::task::sleep(100);
+  Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  vex::task::sleep(1300); 
+  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  chassis.turn_to_angle(145);
+  chassis.drive_distance(17);
+
+  
+
+  // vex::wait(300);
+  // chassis.turn_to_angle(-43);
+
+  // chassis.drive_distance(13.5);
 
 
   // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
@@ -117,6 +165,8 @@ void turn_test(){
   chassis.turn_to_angle(90);
   chassis.turn_to_angle(225);
   chassis.turn_to_angle(0);
+  Controller.Screen.clearScreen();
+  Controller.Screen.print("finished turn test");
 }
 
 /**
