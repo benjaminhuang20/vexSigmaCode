@@ -184,7 +184,7 @@ void autonomous(void) {
 
 
   // turn_test();
-  goalRushRed();
+  goalRushBlue();
 //   switch(current_auton_selection){ 
 //     case 0:
 //       drive_test();
