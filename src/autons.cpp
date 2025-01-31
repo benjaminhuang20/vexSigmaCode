@@ -58,39 +58,77 @@ void odom_constants(){
  */
 
 void goalRushRed(){
+  // sweeperA = false;
+  // sweeperB = true;
+  // clampA = true;
+  // clampB = false;
+  // chassis.drive_distance(-25);
+  // chassis.turn_to_angle(0);
+  // vex::task::sleep(300);
+  // chassis.turn_to_angle(-40);
+  // chassis.drive_distance(-18.5);
+  // clampA = false;
+  // clampB = true;
+  // vex::task::sleep(300);
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  // chassis.drive_distance(5);         
+  // chassis.turn_to_angle(35);
+  // chassis.drive_distance(15);
+  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  // vex::task::sleep(300); 
+  // chassis.turn_to_angle(180);
+  // chassis.drive_distance(-25);
+  // clampA = true;
+  // clampB = false;
+  // chassis.drive_distance(24);
+  // chassis.turn_to_angle(-90);
+  // chassis.drive_distance(-20);
+  // clampA = false;
+  // clampB = true;
+  // vex::task::sleep(100);
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  // vex::task::sleep(1300); 
+  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  // chassis.turn_to_angle(145);
+  // chassis.drive_distance(17);
+
   sweeperA = false;
   sweeperB = true;
   clampA = true;
   clampB = false;
-  chassis.drive_distance(-25);
+  chassis.turn_to_angle(0);
+  chassis.drive_distance(-32);
   chassis.turn_to_angle(0);
   vex::task::sleep(300);
-  chassis.turn_to_angle(-40);
-  chassis.drive_distance(-18.5);
+  chassis.turn_to_angle(-45);
+  chassis.drive_distance(-14);
   clampA = false;
   clampB = true;
   vex::task::sleep(300);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
-  chassis.turn_to_angle(35);
-  chassis.drive_distance(15);
+  chassis.turn_to_angle(10);
+  chassis.drive_distance(13);
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
   vex::task::sleep(300); 
-  chassis.turn_to_angle(180);
+  chassis.turn_to_angle(-180);
   chassis.drive_distance(-25);
   clampA = true;
   clampB = false;
   chassis.drive_distance(24);
   chassis.turn_to_angle(-90);
-  chassis.drive_distance(-20);
+  chassis.drive_distance(-22);
   clampA = false;
   clampB = true;
   vex::task::sleep(100);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   vex::task::sleep(1300); 
-  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  chassis.turn_to_angle(145);
-  chassis.drive_distance(17);
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  chassis.turn_to_angle(-200);
+  chassis.drive_distance(18);
+  clampA = true;
+  clampB = false; //delete
+
 }
 void goalRushBlue(){
   sweeperA = false;
@@ -98,17 +136,20 @@ void goalRushBlue(){
   clampA = true;
   clampB = false;
   chassis.turn_to_angle(0);
-  chassis.drive_distance(-33);
+  chassis.drive_distance(-32);
   chassis.turn_to_angle(0);
   vex::task::sleep(300);
-  chassis.turn_to_angle(40);
-  chassis.drive_distance(-14);
+  chassis.turn_to_angle(-45);
+  vex::task::sleep(300);
+  chassis.drive_distance(-11.5);
   clampA = false;
   clampB = true;
   vex::task::sleep(300);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
-  chassis.turn_to_angle(-35);
+  chassis.turn_to_angle(35);
+  vex::task::sleep(300);
+  
   chassis.drive_distance(13);
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
   vex::task::sleep(300); 
@@ -117,16 +158,16 @@ void goalRushBlue(){
   clampA = true;
   clampB = false;
   chassis.drive_distance(24);
-  chassis.turn_to_angle(90);
-  chassis.drive_distance(-20);
+  chassis.turn_to_angle(270);
+  chassis.drive_distance(-22);
   clampA = false;
   clampB = true;
   vex::task::sleep(100);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   vex::task::sleep(1300); 
-  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  chassis.turn_to_angle(180  );
-  chassis.drive_distance(15);
+  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+  chassis.turn_to_angle(135);
+  chassis.drive_distance(18);
   clampA = true;
   clampB = false; //delete
 }
