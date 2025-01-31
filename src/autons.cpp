@@ -57,7 +57,7 @@ void odom_constants(){
  * The expected behavior is to return to the start position.
  */
 
-void goalRushBlue(){
+void goalRushRed(){
   sweeperA = false;
   sweeperB = true;
   clampA = true;
@@ -92,7 +92,7 @@ void goalRushBlue(){
   chassis.turn_to_angle(145);
   chassis.drive_distance(17);
 }
-void goalRushRed(){
+void goalRushBlue(){
   sweeperA = false;
   sweeperB = true;
   clampA = true;
