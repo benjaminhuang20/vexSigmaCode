@@ -5,7 +5,7 @@
  * Modify these to change the default behavior of functions like
  * drive_distance(). For explanations of the difference between
  * drive, heading, turning, and swinging, as well as the PID and
- * exit conditions, check the docs. ROSHIE TIME PLS WORK
+ * exit conditions, check the docs. ROSHIE TIME PLS WORK come on TateTime
  */
 
 void default_constants(){
