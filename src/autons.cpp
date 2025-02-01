@@ -57,40 +57,8 @@ void odom_constants(){
  * The expected behavior is to return to the start position.
  */
 
-void goalRushRed(){
-  // sweeperA = false;
-  // sweeperB = true;
-  // clampA = true;
-  // clampB = false;
-  // chassis.drive_distance(-25);
-  // chassis.turn_to_angle(0);
-  // vex::task::sleep(300);
-  // chassis.turn_to_angle(-40);
-  // chassis.drive_distance(-18.5);
-  // clampA = false;
-  // clampB = true;
-  // vex::task::sleep(300);
-  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
-  // chassis.drive_distance(5);         
-  // chassis.turn_to_angle(35);
-  // chassis.drive_distance(15);
-  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  // vex::task::sleep(300); 
-  // chassis.turn_to_angle(180);
-  // chassis.drive_distance(-25);
-  // clampA = true;
-  // clampB = false;
-  // chassis.drive_distance(24);
-  // chassis.turn_to_angle(-90);
-  // chassis.drive_distance(-20);
-  // clampA = false;
-  // clampB = true;
-  // vex::task::sleep(100);
-  // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
-  // vex::task::sleep(1300); 
-  // Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  // chassis.turn_to_angle(145);
-  // chassis.drive_distance(17);
+void goalRushBlue(){
+
 
   sweeperA = false;
   sweeperB = true;
@@ -100,37 +68,40 @@ void goalRushRed(){
   chassis.drive_distance(-32);
   chassis.turn_to_angle(0);
   vex::task::sleep(300);
-  chassis.turn_to_angle(-45);
-  chassis.drive_distance(-14);
+  chassis.turn_to_angle(40);
+  vex::task::sleep(300);
+  chassis.drive_distance(-12);
   clampA = false;
   clampB = true;
   vex::task::sleep(300);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
-  chassis.turn_to_angle(10);
+  chassis.turn_to_angle(-35);
+  vex::task::sleep(300);
+  
   chassis.drive_distance(13);
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
   vex::task::sleep(300); 
-  chassis.turn_to_angle(-180);
+  chassis.turn_to_angle(180);
   chassis.drive_distance(-25);
   clampA = true;
   clampB = false;
   chassis.drive_distance(24);
-  chassis.turn_to_angle(-90);
-  chassis.drive_distance(-22);
+  chassis.turn_to_angle(90);
+  chassis.drive_distance(-23);
   clampA = false;
   clampB = true;
   vex::task::sleep(100);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   vex::task::sleep(1300); 
   // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
-  chassis.turn_to_angle(-200);
-  chassis.drive_distance(18);
+  chassis.turn_to_angle(270);
+  chassis.drive_distance(19);
   clampA = true;
   clampB = false; //delete
 
 }
-void goalRushBlue(){
+void goalRushRed(){
   sweeperA = false;
   sweeperB = true;
   clampA = true;
@@ -143,22 +114,22 @@ void goalRushBlue(){
   vex::task::sleep(300);
   chassis.drive_distance(-11.5);
   clampA = false;
-  clampB = true;
+  clampB = true;\
   vex::task::sleep(300);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
-  chassis.turn_to_angle(35);
-  vex::task::sleep(300);
+  chassis.turn_to_angle(45);
+  vex::task::sleep(100);
   
   chassis.drive_distance(13);
   Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  vex::task::sleep(300); 
+  vex::task::sleep(100); 
   chassis.turn_to_angle(180);
   chassis.drive_distance(-25);
   clampA = true;
   clampB = false;
   chassis.drive_distance(24);
-  chassis.turn_to_angle(270);
+  chassis.turn_to_angle(260);
   chassis.drive_distance(-22);
   clampA = false;
   clampB = true;
@@ -166,10 +137,10 @@ void goalRushBlue(){
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   vex::task::sleep(1300); 
   // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
-  chassis.turn_to_angle(135);
+  chassis.turn_to_angle(180);
+  // chassis.turn_to_angle(135);
   chassis.drive_distance(18);
-  clampA = true;
-  clampB = false; //delete
+
 }
 
 /**
