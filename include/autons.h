@@ -10,6 +10,8 @@ void default_constants();
 void drive_test();
 void goalRushRed();
 void goalRushBlue();
+void ringSideRed();
+void ringSideBlue();
 void turn_test();
 void swing_test();
 void full_test();

@@ -64,24 +64,18 @@ void goalRushBlue(){
   sweeperB = true;
   clampA = true;
   clampB = false;
-  chassis.turn_to_angle(0);
   chassis.drive_distance(-32);
   chassis.turn_to_angle(0);
-  vex::task::sleep(300);
   chassis.turn_to_angle(40);
-  vex::task::sleep(300);
   chassis.drive_distance(-12);
   clampA = false;
   clampB = true;
-  vex::task::sleep(300);
+  vex::task::sleep(200); 
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
-  chassis.turn_to_angle(-35);
-  vex::task::sleep(300);
-  
-  chassis.drive_distance(13);
-  Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  vex::task::sleep(300); 
+  chassis.turn_to_angle(-45); //0--------------------
+  chassis.drive_distance(12);
+ Intake.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
   chassis.turn_to_angle(180);
   chassis.drive_distance(-25);
   clampA = true;
@@ -96,26 +90,24 @@ void goalRushBlue(){
   vex::task::sleep(1300); 
   // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.turn_to_angle(270);
-  chassis.drive_distance(19);
-  clampA = true;
-  clampB = false; //delete
+  chassis.drive_distance(20);
 
 }
 void goalRushRed(){
-  sweeperA = false;
+  sweeperA = false;   
   sweeperB = true;
   clampA = true;
   clampB = false;
   chassis.turn_to_angle(0);
   chassis.drive_distance(-32);
   chassis.turn_to_angle(0);
-  vex::task::sleep(300);
+  // vex::task::sleep(100);
   chassis.turn_to_angle(-45);
-  vex::task::sleep(300);
+  // vex::task::sleep(100);
   chassis.drive_distance(-11.5);
   clampA = false;
-  clampB = true;\
-  vex::task::sleep(300);
+  clampB = true;
+  vex::task::sleep(100);
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   chassis.drive_distance(5);
   chassis.turn_to_angle(45);
@@ -129,7 +121,7 @@ void goalRushRed(){
   clampA = true;
   clampB = false;
   chassis.drive_distance(24);
-  chassis.turn_to_angle(260);
+  chassis.turn_to_angle(-90);
   chassis.drive_distance(-22);
   clampA = false;
   clampB = true;
@@ -137,11 +129,101 @@ void goalRushRed(){
   Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
   vex::task::sleep(1300); 
   // Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
-  chassis.turn_to_angle(180);
+  chassis.turn_to_angle(170);
   // chassis.turn_to_angle(135);
   chassis.drive_distance(18);
 
 }
+
+void ringSideBlue(){
+clampA = true;
+clampB = false;
+
+chassis.drive_distance(-24);
+clampA = false;
+clampB = true;
+chassis.drive_distance(-6);
+chassis.turn_to_angle(-90);
+
+Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+vex::task::sleep(100);  
+chassis.drive_distance(24);
+vex::task::sleep(400);
+
+chassis.turn_to_angle(180);
+chassis.drive_distance(17);
+vex::task::sleep(400);
+chassis.drive_distance(-7);
+
+chassis.turn_to_angle(130);
+chassis.drive_distance(8);
+vex::task::sleep(200);
+chassis.drive_distance(-13);
+
+chassis.turn_to_angle(90);
+chassis.drive_distance(27);
+
+//rwar
+
+
+// chassis.turn_to_angle(160);
+// Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+// chassis.drive_distance(20);
+// chassis.drive_distance(-10);
+
+// chassis.turn_to_angle(200);
+// Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+// chassis.drive_distance(10);
+
+
+
+}
+
+void ringSideRed(){
+clampA = true;
+clampB = false;
+
+chassis.drive_distance(-24);
+clampA = false;
+clampB = true;
+chassis.drive_distance(-6);
+chassis.turn_to_angle(90);
+
+Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct);
+vex::task::sleep(400);  
+chassis.drive_distance(24);
+vex::task::sleep(400);
+
+chassis.turn_to_angle(165);
+chassis.drive_distance(17);
+vex::task::sleep(400);
+chassis.drive_distance(-7);
+
+chassis.turn_to_angle(-130);
+chassis.drive_distance(8);
+vex::task::sleep(200);
+chassis.drive_distance(-13);
+
+chassis.turn_to_angle(-90);
+chassis.drive_distance(27);
+
+//rwar
+
+
+// chassis.turn_to_angle(160);
+// Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+// chassis.drive_distance(20);
+// chassis.drive_distance(-10);
+
+// chassis.turn_to_angle(200);
+// Intake.spin(directionType::fwd, 100, vex::velocityUnits::pct); 
+// chassis.drive_distance(10);
+
+
+
+}
+
+
 
 /**
  * The expected behavior is to return to the start angle, after making a complete turn.
