@@ -26,7 +26,8 @@ extern motor Arm2;
 
 extern motor_group Arms;
 
-extern motor Intake;
+extern motor Intake1;
+extern motor Intake2;
 
 extern digital_out clampA; 
 extern digital_out clampB; 

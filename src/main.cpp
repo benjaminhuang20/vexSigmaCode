@@ -289,7 +289,7 @@ void usercontrol(void) {
     averageDriveTemp=averageDriveTemp/6;
     Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(averageDriveTemp),Controller.Screen.print(" F");
     Brain.Screen.clearLine(9),Brain.Screen.setCursor(9,1),Brain.Screen.print("Drive Temp: "),Brain.Screen.print(averageDriveTemp),Brain.Screen.print(" F");
-    Brain.Screen.clearLine(10),Brain.Screen.setCursor(10,1),Brain.Screen.print("Intake Temp: "),Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit)), Brain.Screen.print(" F");
+    // Brain.Screen.clearLine(10),Brain.Screen.setCursor(10,1),Brain.Screen.print("Intake Temp: "),Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit)), Brain.Screen.print(" F");
       if(Brain.Battery.capacity()<20){
         if(warnBattery == false){
         Controller.rumble(". . .");
@@ -498,7 +498,8 @@ void usercontrol(void) {
     int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 1000;
     // int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
     // ArmAngleFinal = ArmAngleFinal + ArmSpeed;
-    Intake.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
+    Intake1.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
+    Intake2.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
     // Arm1.spinToPosition(ArmAngleFinal, rotationUnits::deg, 50, vex::velocityUnits::pct);
 
     
