@@ -479,8 +479,8 @@ void usercontrol(void) {
       Controller.Screen.setCursor(1,1); 
       ToggleBY = false;
       if(driveMode==2){
-          Brain.Screen.print("Normal Mode");
-          Controller.Screen.print("Normal Mode");
+          Brain.Screen.print("Normal (Sigma) Mode");
+          Controller.Screen.print("Normal (Sigma) Mode");
           driveMode = 0;
         }else{
           Brain.Screen.print("CONTROL LOCK");
@@ -495,7 +495,7 @@ void usercontrol(void) {
     Brain.Screen.setCursor(5,1);
     
 
-    int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 1000;
+    int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 100 * 2;
     // int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
     // ArmAngleFinal = ArmAngleFinal + ArmSpeed;
     Intake1.spin(directionType::fwd, IntakeSpeed, vex::velocityUnits::pct);
