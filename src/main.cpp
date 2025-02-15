@@ -245,7 +245,7 @@ void usercontrol(void) {
 
   int driveMode = 0;
   // bool DoinkerOn;
-  bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false, ToggleBY = false;
+  bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false, ToggleBY = false, ToggleUp = false, ToggleDown = false;
   int ArmAngle = 0;
   // int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
@@ -278,7 +278,8 @@ void usercontrol(void) {
     // Brain.Screen.setCursor(2,1);
     // Brain.Screen.clearLine(2);
     // Brain.Screen.print(ControllerUpdate);
-    if(ControllerUpdate == 40){
+    if(ControllerUpdate == 100){
+    timeElapsed=vex::timer::system();
     OrderedUpdate = 0;
     ControllerUpdate = 0;
     averageDriveTemp = 
@@ -334,7 +335,7 @@ void usercontrol(void) {
         warnTemp3 = false;
       }
     }else{
-      Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed);
+      Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed/100);
     }
     if(driveMode==1){
 
@@ -495,8 +496,16 @@ void usercontrol(void) {
       ToggleBY = true;
     }
     
-    Brain.Screen.setCursor(5,1);
     
+    
+    
+    
+    
+    
+    
+    
+    
+    Brain.Screen.setCursor(5,1);
 
     int IntakeSpeed = (Controller.ButtonR1.pressing() + Controller.ButtonL1.pressing()* (-1)) * 100 * 2;
     // int ArmSpeed = (Controller.ButtonY.pressing() + Controller.ButtonB.pressing()* (-1)) * 30;
@@ -507,11 +516,8 @@ void usercontrol(void) {
 
     
 
-    // testMotor.spin(vex::directionType::fwd, Controller.Axis1.position(percent), vex::velocityUnits::pct);; 
-    timeElapsed=timeElapsed+0.02;
-    Brain.Screen.setCursor(5,1);
-    Brain.Screen.clearLine(5);
-    Brain.Screen.print(timeElapsed);
+
+
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
     }
