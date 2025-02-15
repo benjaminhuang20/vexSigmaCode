@@ -221,6 +221,13 @@ chassis.drive_distance(27);
 
 }
 
+void goalStakeMacro(){
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+  chassis.drive_distance(2.0);
+}
 
 
 /**

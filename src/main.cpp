@@ -261,7 +261,8 @@ void usercontrol(void) {
   Controller.Screen.setCursor(2, 1),Controller.Screen.print("Clamp Retracted");
   bool ClampOn = false;
   bool allowWarnings = false;
-  float timeElapsed = 0;
+  int timeElapsed = 0;
+  int oldTime = 0;
   sweeperA = false;
   sweeperB = true;
   clampA = false;
@@ -278,8 +279,8 @@ void usercontrol(void) {
     // Brain.Screen.setCursor(2,1);
     // Brain.Screen.clearLine(2);
     // Brain.Screen.print(ControllerUpdate);
-    if(ControllerUpdate == 100){
-    timeElapsed=vex::timer::system();
+    if(ControllerUpdate == 30){
+    timeElapsed=round(vex::timer::system()/1000);
     OrderedUpdate = 0;
     ControllerUpdate = 0;
     averageDriveTemp = 
@@ -335,13 +336,21 @@ void usercontrol(void) {
         warnTemp3 = false;
       }
     }else{
-      Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed/100);
+      if(timeElapsed==oldTime){
+      }else{
+        Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed);
+        oldTime = timeElapsed;
+        if(timeElapsed%5==0){
+          Controller.rumble(".");
+        }
+      }
     }
+  }
     if(driveMode==1){
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
-      
+      chassis.control_arcade(0.2);
       
     }else if(driveMode==0){
 
@@ -351,6 +360,7 @@ void usercontrol(void) {
     }else{
       chassis.control_arcade(0);
     }
+  
    
 
 
@@ -422,23 +432,8 @@ void usercontrol(void) {
 
     if(Controller.ButtonL2.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleL2){
-      ArmAngle++;
-      if(ArmAngle % 2 == 0){
-        Arm1.spinToPosition(0, rotationUnits::deg, 10, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(0, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        
- 
-       
-      }else if(ArmAngle % 2 == 1){
-        Arm1.spinToPosition(700, rotationUnits::deg, 300, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(100.5, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(110, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      }else{
-        Arm1.spinToPosition(0, rotationUnits::deg, 30, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
-        // Arm2.spinToPosition(750, rotationUnits::deg, 50, vex::velocityUnits::pct);
-      }
+      goalStakeMacro();
+  
       Brain.Screen.print("Arm Toggled");
       ToggleL2 = false;
       
@@ -522,7 +517,7 @@ void usercontrol(void) {
                     // prevent wasted resources.
     }
   }
-}
+
 
 //
 // Main will set up the competition functions and callbacks.

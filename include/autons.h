@@ -10,6 +10,7 @@ void default_constants();
 void drive_test();
 void goalRushRed();
 void goalRushBlue();
+void goalStakeMacro();
 void ringSideRed();
 void ringSideBlue();
 void turn_test();
