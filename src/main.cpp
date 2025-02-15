@@ -260,6 +260,8 @@ void usercontrol(void) {
   Brain.Screen.print("Clamp Retracted");
   Controller.Screen.setCursor(2, 1),Controller.Screen.print("Clamp Retracted");
   bool ClampOn = false;
+  bool allowWarnings = false;
+  float timeElapsed = 0;
   sweeperA = false;
   sweeperB = true;
   clampA = false;
@@ -287,10 +289,11 @@ void usercontrol(void) {
     MiddleLeft.temperature(temperatureUnits::fahrenheit) + 
     UpsidedownLeft.temperature(temperatureUnits::fahrenheit);
     averageDriveTemp=averageDriveTemp/6;
-    Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(averageDriveTemp),Controller.Screen.print(" F");
     Brain.Screen.clearLine(9),Brain.Screen.setCursor(9,1),Brain.Screen.print("Drive Temp: "),Brain.Screen.print(averageDriveTemp),Brain.Screen.print(" F");
     // Brain.Screen.clearLine(10),Brain.Screen.setCursor(10,1),Brain.Screen.print("Intake Temp: "),Brain.Screen.print(Intake.temperature(temperatureUnits::fahrenheit)), Brain.Screen.print(" F");
-      if(Brain.Battery.capacity()<20){
+    if(allowWarnings){
+      Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(averageDriveTemp),Controller.Screen.print(" F");
+    if(Brain.Battery.capacity()<20){
         if(warnBattery == false){
         Controller.rumble(". . .");
         Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1), Controller.Screen.print("BATTERY WARNING 20");
@@ -330,14 +333,14 @@ void usercontrol(void) {
       }else{
         warnTemp3 = false;
       }
-
-      
+    }else{
+      Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed);
     }
     if(driveMode==1){
 
       // Brain.Screen.print("Slow Mode");
       // controllerPrint(2,"Slow Mode");
-      chassis.control_arcade(.2);
+      
       
     }else if(driveMode==0){
 
@@ -505,9 +508,13 @@ void usercontrol(void) {
     
 
     // testMotor.spin(vex::directionType::fwd, Controller.Axis1.position(percent), vex::velocityUnits::pct);; 
-
+    timeElapsed=timeElapsed+0.02;
+    Brain.Screen.setCursor(5,1);
+    Brain.Screen.clearLine(5);
+    Brain.Screen.print(timeElapsed);
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
+    }
   }
 }
 
