@@ -226,7 +226,7 @@ void goalStakeMacro(){
   sweeperB = true;
   clampA = false;
   clampB = true;
-  chassis.drive_distance(2.0);
+  chassis.drive_distance(3.0);
 }
 
 
