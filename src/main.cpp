@@ -184,7 +184,7 @@ void autonomous(void) {
 
   //ringSideBlue();
   // ringSideRed();
-  goalRushRed();
+  backUpAuton();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -257,9 +257,9 @@ void usercontrol(void) {
   Brain.Screen.print("Normal Mode");
   Controller.Screen.setCursor(1, 1),Controller.Screen.print("Normal Mode");
   Brain.Screen.setCursor(4,1);
-  Brain.Screen.print("Clamp Retracted");
-  Controller.Screen.setCursor(2, 1),Controller.Screen.print("Clamp Retracted");
-  bool ClampOn = false;
+  Brain.Screen.print("Clamp Off");
+  Controller.Screen.setCursor(2, 1),Controller.Screen.print("Clamp Off");
+  bool ClampOn = true;
   bool allowWarnings = false;
   int timeElapsed = 0;
   int oldTime = 0;
@@ -340,8 +340,11 @@ void usercontrol(void) {
       }else{
         Controller.Screen.clearLine(3),Controller.Screen.setCursor(3, 1),Controller.Screen.print(timeElapsed);
         oldTime = timeElapsed;
-        if(timeElapsed%5==0){
-          Controller.rumble(".");
+        // if(timeElapsed%5==0){
+        //   Controller.rumble("-");
+        // }
+        if(timeElapsed==70){
+          Controller.rumble(".................");
         }
       }
     }
@@ -396,18 +399,18 @@ void usercontrol(void) {
       if(ToggleR2 == true){
         clampA = !clampA;
         clampB = !clampB;
-        ClampOn =!ClampOn;
+        ClampOn = clampB;
         Brain.Screen.setCursor(4,1);
         Controller.Screen.setCursor(2,1);
         Brain.Screen.clearLine(4,1);
         Controller.Screen.clearLine(2);
-        if (ClampOn == true){
-          Brain.Screen.print("Clamp Retracted");
-          Controller.Screen.print("Clamp Retracted");
+        if (ClampOn == 0){
+          Brain.Screen.print("Clamp Off");
+          Controller.Screen.print("Clamp Off");
           
         }else{
-          Brain.Screen.print("Clamp Extended");
-          Controller.Screen.print("Clamp Extended");
+          Brain.Screen.print("Clamp On");
+          Controller.Screen.print("Clamp On");
         }
         // clampUpdate;
         ToggleR2 = false;
@@ -449,10 +452,10 @@ void usercontrol(void) {
       Brain.Screen.clearLine(3);  
       Controller.Screen.clearLine(1);
       Controller.Screen.setCursor(1,1); 
-      if(driveMode==0){
-        driveMode=1;
-      }else{
+      if(driveMode==1){
         driveMode=0;
+      }else{
+        driveMode=1;
       }
 
       if(driveMode==0){

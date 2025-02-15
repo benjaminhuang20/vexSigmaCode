@@ -92,6 +92,24 @@ void goalRushBlue(){
   chassis.drive_distance(20);
 
 }
+
+
+
+void backUpAuton(){
+  clampA = false;
+  clampB = true;
+  chassis.drive_distance(-24);
+  clampA = true;
+  clampB = false;
+  wait(1,seconds);
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  wait(1,seconds);
+  chassis.drive_distance(12);
+  Intake1.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  }
+
 void goalRushRed(){
   sweeperA = false;   
   sweeperB = true;
@@ -226,7 +244,7 @@ void goalStakeMacro(){
   sweeperB = true;
   clampA = false;
   clampB = true;
-  chassis.drive_distance(3.0);
+  chassis.drive_distance(2);
 }
 
 

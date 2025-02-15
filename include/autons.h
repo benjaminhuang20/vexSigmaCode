@@ -13,6 +13,7 @@ void goalRushBlue();
 void goalStakeMacro();
 void ringSideRed();
 void ringSideBlue();
+void backUpAuton();
 void turn_test();
 void swing_test();
 void full_test();
