@@ -292,7 +292,14 @@ void Drive::turn_to_angle(float angle, float turn_max_voltage, float turn_settle
   {
     float error = reduce_negative_180_to_180(angle - get_absolute_heading());
     float output = turnPID.compute(error);
+
+
+
+    // if(reduce_negative_180_to_180(angle - get_absolute_heading() < 180)){
+    //   output = -output; 
+    // } 
     output = clamp(output, -turn_max_voltage, turn_max_voltage);
+    
     drive_with_voltage(output, -output);
     task::sleep(10);
   }
@@ -313,7 +320,7 @@ void Drive::turn_to_angle(float angle, float turn_max_voltage, float turn_settle
 void Drive::drive_distance(float distance)
 {
   // 
-  drive_distance(distance, get_absolute_heading(), 6, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);
+  drive_distance(distance, get_absolute_heading(), 9, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);
 }
 
 void Drive::tate_turn(float turn)

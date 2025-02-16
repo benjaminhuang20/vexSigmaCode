@@ -54,7 +54,7 @@ motor_group(frontLeft, MiddleLeft, UpsidedownLeft),
 motor_group(frontRight, MiddleRight, UpsidedownRight),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT20,
+PORT18,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
 3.25,
@@ -184,7 +184,7 @@ void autonomous(void) {
 
   //ringSideBlue();
   // ringSideRed();
-  backUpAuton();
+  skillsAuton();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -263,10 +263,10 @@ void usercontrol(void) {
   bool allowWarnings = false;
   int timeElapsed = 0;
   int oldTime = 0;
-  sweeperA = false;
-  sweeperB = true;
-  clampA = false;
-  clampB = true; //yay yay
+  sweeperA = 1;
+  sweeperB = 0;
+  clampA = 1;
+  clampB = 0; //yay yay
  
 
   
@@ -444,6 +444,17 @@ void usercontrol(void) {
     }else{
       ToggleL2 = true;
     }
+    if(Controller.ButtonUp.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
+      if(ToggleUp){
+        startMacro();
+    
+        ToggleUp = false;
+        
+      }
+      }else{
+        ToggleUp = true;
+      }
+  
 
     if(Controller.ButtonA.pressing()){ //If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
     if(ToggleA){

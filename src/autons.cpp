@@ -37,21 +37,67 @@ void default_constants(){
   chassis.set_swing_exit_conditions(1, 300, 3000);
 
 }
-
 /**
  * Sets constants to be more effective for odom movements.
  * For functions like drive_to_point(), it's often better to have
  * a slower max_voltage and greater settle_error than you would otherwise.
  */
 
-void odom_constants(){
+ void odom_constants(){
   default_constants();
   chassis.heading_max_voltage = 10;
   chassis.drive_max_voltage = 8;
   chassis.drive_settle_error = 3;
-  chassis.boomerang_lead = .5;
+  chassis.boomerang_lead= .5;
   chassis.drive_min_voltage = 0;
 }
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ 
+// Skills Auton
+void skillsAuton(){
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+
+  vex::task::sleep(500); 
+
+  chassis.drive_distance(20); 
+  chassis.turn_to_angle(77); 
+  chassis.drive_distance(-24); 
+  //
+  clampA = true;
+  clampB = false;
+  //
+  vex::task::sleep(500); 
+  chassis.turn_to_angle(341);
+  chassis.drive_distance(30);
+  // 
+  chassis.turn_to_angle(285);
+  chassis.drive_distance(25); 
+  chassis.turn_to_angle(150);
+  chassis.drive_distance(15);
+
+  chassis.turn_to_angle(177);
+  chassis.drive_distance(15);
+  chassis.turn_to_angle(288);
+  chassis.drive_distance(-15);
+  chassis.turn_to_angle(31);
+  chassis.drive_distance(-15);
+
+  clampA = true;
+  clampB = false;
+
+
+
+  // chassis.turn_to_angle(90); 
+
+  
+}
+// ██████████████████████████████████████████████████████████████████████████████████████████████████
+
 
 /**
  * The expected behavior is to return to the start position.
@@ -95,20 +141,36 @@ void goalRushBlue(){
 
 
 
+
 void backUpAuton(){
-  clampA = false;
-  clampB = true;
-  chassis.drive_distance(-24);
+  // clampA = false;
+  // clampB = true;
+  // chassis.drive_distance(-24);
+  // clampA = true;
+  // clampB = false;
+  // wait(1,seconds);
+  // Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  // wait(1,seconds);
+  // // chassis.drive_distance(12);
+  // // Intake1.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
+  // // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  // chassis.turn_to_angle(90);
+  // chassis.drive_distance(16);
+  chassis.drive_distance(-5);
+
+
+  }
+void startMacro(){
+  chassis.drive_distance(4);
+  chassis.turn_to_angle(109);
   clampA = true;
   clampB = false;
-  wait(1,seconds);
-  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
-  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
-  wait(1,seconds);
-  chassis.drive_distance(12);
-  Intake1.spin(directionType::fwd, 0, vex::velocityUnits::pct); 
-  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
-  }
+  chassis.drive_distance(-18);
+  clampA = false;
+  clampB = true;
+}
+
 
 void goalRushRed(){
   sweeperA = false;   
