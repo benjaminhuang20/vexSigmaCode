@@ -70,13 +70,13 @@ void skillsAuton(){
   //
   clampA = true;
   clampB = false;
-  //
+  // fun
   vex::task::sleep(500); 
   chassis.turn_to_angle(341);
-  chassis.drive_distance(30);
+  chassis.drive_distance(25);
   // 
-  chassis.turn_to_angle(285);
-  chassis.drive_distance(25); 
+  chassis.turn_to_angle(265);
+  chassis.drive_distance(30); 
   chassis.turn_to_angle(150);
   chassis.drive_distance(15);
 
