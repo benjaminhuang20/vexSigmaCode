@@ -12,7 +12,7 @@ void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(8, .075, 0, 0, 0);
+  chassis.set_turn_constants(8, .07, 0, 0, 0);
   chassis.set_swing_constants(8, .3, .001, 2, 15);
 
   // Each exit condition set is in the form of (settle_error, settle_time, timeout).
@@ -54,41 +54,68 @@ void default_constants(){
 // ██████████████████████████████████████████████████████████████████████████████████████████████████ 
 // Skills Auton
 void skillsAuton(){
+  float error = 0;
   sweeperA = false;
   sweeperB = true;
   clampA = false;
   clampB = true;
+
+  goalStakeMacro();
+
+
 
   Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
   Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
 
   vex::task::sleep(500); 
 
-  chassis.drive_distance(20); 
-  chassis.turn_to_angle(77); 
-  chassis.drive_distance(-24); 
+  chassis.drive_distance(7); 
+  chassis.turn_to_angle(111+error); 
+  chassis.drive_distance(-20); 
   //
   clampA = true;
-  clampB = false;
+  clampB = false; // clamap first gool
   // fun
-  vex::task::sleep(500); 
-  chassis.turn_to_angle(341);
-  chassis.drive_distance(25);
+  vex::task::sleep(500);
+  error = error - 12;
+  chassis.turn_to_angle(0+error); 
+  chassis.drive_distance(25); // rizz up a ring
   // 
-  chassis.turn_to_angle(265);
-  chassis.drive_distance(30); 
-  chassis.turn_to_angle(150);
-  chassis.drive_distance(15);
+  error = error - 12;
+  chassis.turn_to_angle(304.3+error); // ring on the line 
+  chassis.drive_distance(32); //go there
+  // chassis.turn_to_angle(135); //turn to other ring
+  // chassis.drive_distance(15);//goooooo
 
-  chassis.turn_to_angle(177);
-  chassis.drive_distance(15);
-  chassis.turn_to_angle(288);
-  chassis.drive_distance(-15);
-  chassis.turn_to_angle(31);
-  chassis.drive_distance(-15);
+  // vex::task::sleep(5000); 
 
-  clampA = true;
-  clampB = false;
+  // chassis.turn_to_angle(200);
+  // chassis.drive_distance(41,5);
+  // chassis.turn_to_angle(288);
+  // chassis.drive_distance(15);
+  // chassis.turn_to_angle(30);
+  // chassis.drive_distance(-15);
+  // chassis.turn_to_angle(-300);
+  // chassis.drive_distance(-15);
+  // chassis.turn_to_angle(-300);
+
+
+//   clampA = false;
+//   clampB = true;
+//   chassis.drive_distance(15);
+// chassis.turn_to_angle(-90);
+// chassis.drive_distance(-60);
+//   clampA = true;
+//   clampB = false;
+//   // fun
+//   vex::task::sleep(500); 
+//   chassis.turn_to_angle(-341);
+//   chassis.drive_distance(25);
+//   // 
+//   chassis.turn_to_angle(-285); //turnTo ring next to tristan
+//   chassis.drive_distance(33); //go there
+//   chassis.turn_to_angle(-135); //turn to other ring
+//   chassis.drive_distance(15);//goooooo
 
 
 
@@ -162,13 +189,29 @@ void backUpAuton(){
 
   }
 void startMacro(){
-  chassis.drive_distance(4);
-  chassis.turn_to_angle(109);
-  clampA = true;
-  clampB = false;
-  chassis.drive_distance(-18);
+    sweeperA = false;
+  sweeperB = true;
   clampA = false;
   clampB = true;
+
+  goalStakeMacro();
+
+
+
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct); 
+
+  vex::task::sleep(500); 
+
+  chassis.drive_distance(20); 
+  chassis.turn_to_angle(77); 
+  chassis.drive_distance(-24); 
+  //
+  clampA = true;
+  clampB = false;
+  // fun
+  vex::task::sleep(500); 
+  chassis.turn_to_angle(341);
 }
 
 
@@ -315,10 +358,20 @@ void goalStakeMacro(){
  */
 
 void turn_test(){
-  chassis.turn_to_angle(5);
-  chassis.turn_to_angle(30);
   chassis.turn_to_angle(90);
-  chassis.turn_to_angle(225);
+  chassis.turn_to_angle(180);
+  chassis.turn_to_angle(270);
+  chassis.turn_to_angle(360);
+  chassis.turn_to_angle(0);
+  chassis.turn_to_angle(90);
+  chassis.turn_to_angle(180);
+  chassis.turn_to_angle(270);
+  chassis.turn_to_angle(360);
+  chassis.turn_to_angle(0);
+  chassis.turn_to_angle(90);
+  chassis.turn_to_angle(180);
+  chassis.turn_to_angle(270);
+  chassis.turn_to_angle(360);
   chassis.turn_to_angle(0);
   Controller.Screen.clearScreen();
   Controller.Screen.print("finished turn test");

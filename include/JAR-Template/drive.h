@@ -107,6 +107,7 @@ public:
   void tate_turn(float distance);
   void tate_turn_negative(float distance);
 
+  void drive_distance(float distance, int voltage);
   void drive_distance(float distance, float heading);
   void drive_distance(float distance, float heading, float drive_max_voltage, float heading_max_voltage);
   void drive_distance(float distance, float heading, float drive_max_voltage, float heading_max_voltage, float drive_settle_error, float drive_settle_time, float drive_timeout);

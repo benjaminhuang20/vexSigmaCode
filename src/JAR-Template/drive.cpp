@@ -323,6 +323,12 @@ void Drive::drive_distance(float distance)
   drive_distance(distance, get_absolute_heading(), 9, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);
 }
 
+void Drive::drive_distance(float distance, int voltage)
+{
+  // 
+  drive_distance(distance, get_absolute_heading(), voltage, heading_max_voltage, drive_settle_error, drive_settle_time, drive_timeout, drive_kp, drive_ki, drive_kd, drive_starti, heading_kp, heading_ki, heading_kd, heading_starti);
+}
+
 void Drive::tate_turn(float turn)
 {
   DriveL.spin(directionType::fwd, 100, vex::velocityUnits::pct);
