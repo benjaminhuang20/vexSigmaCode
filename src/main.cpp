@@ -263,7 +263,7 @@ void usercontrol(void)
   Brain.Screen.print("Clamp Off");
   Controller.Screen.setCursor(2, 1), Controller.Screen.print("Clamp Off");
   bool ClampOn = true;
-  bool allowWarnings = true;
+  bool allowWarnings = false;
   int timeElapsed = 0;
   int oldTime = 0;
   sweeperA = 0;
