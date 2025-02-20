@@ -98,7 +98,7 @@ void skillsAuton()
   error = error + 10;
   chassis.drive_distance(45, 180 + error, 6, 6); // go there
 
-  chassis.turn_to_angle(334 + error); // ring on the line
+  chassis.turn_to_angle(324 + error); // ring on the line
   chassis.drive_distance(13);          // go there
 
   chassis.turn_to_angle(80 + error); // ring on the line
