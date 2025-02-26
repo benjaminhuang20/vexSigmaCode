@@ -247,6 +247,44 @@ void goalRushBlue()
   chassis.turn_to_angle(270);
   chassis.drive_distance(20);
 }
+void TresRedRing()
+{
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+  chassis.drive_distance(-20);
+  clampA = true;
+  clampB = false;
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  vex::task::sleep(400);
+  chassis.turn_to_angle(120);
+  chassis.drive_distance(25);
+  chassis.turn_to_angle(190);
+  chassis.drive_distance(13);
+  chassis.drive_distance(-13);
+  chassis.turn_to_angle(220);
+  chassis.drive_distance(13);
+}
+void TresBlueRing(){
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+}
+void TresRedGoal(){
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+}
+void TresBlueGoal(){
+  sweeperA = false;
+  sweeperB = true;
+  clampA = false;
+  clampB = true;
+}
 
 void backUpAuton()
 {

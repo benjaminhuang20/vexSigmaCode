@@ -193,7 +193,8 @@ void autonomous(void)
   // ringSideBlue();
   //  ringSideRed();
   // backUpAuton();
-  skillsAuton();
+  TresRedRing();
+  //skillsAuton();
 }
 
 /*---------------------------------------------------------------------------*/

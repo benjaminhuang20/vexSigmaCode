@@ -25,3 +25,7 @@ void odom_test();
 void tank_odom_test();
 void holonomic_odom_test();
 void startMacro();
+void TresRedRing();
+void TresBlueRing();
+void TresRedGoal();
+void TresBlueGoal();
