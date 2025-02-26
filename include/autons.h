@@ -8,7 +8,10 @@ extern Drive chassis;
 void default_constants();
 
 void drive_test();
-void skillsAuton(); 
+void skillsAuton();
+void firstQuarter();
+void firstCrossover();
+void secondQuarter();
 void goalRushRed();
 void goalRushBlue();
 void goalStakeMacro();

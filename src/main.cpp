@@ -192,7 +192,7 @@ void autonomous(void)
 
   // ringSideBlue();
   //  ringSideRed();
-
+  // backUpAuton();
   skillsAuton();
 }
 
@@ -268,8 +268,10 @@ void usercontrol(void)
   int oldTime = 0;
   sweeperA = 0;
   sweeperB = 1;
-  clampA = 0;
-  clampB = 1; // yay yay
+  // clampA = 0;
+  // clampB = 1; // yay yay
+  clampA = false;
+  clampB = true; // clamap first gool
 
   while (1)
   {

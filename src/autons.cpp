@@ -51,9 +51,37 @@ void odom_constants()
   chassis.boomerang_lead = .5;
   chassis.drive_min_voltage = 0;
 }
-// ██████████████████████████████████████████████████████████████████████████████████████████████████
-// Skills Auton
+
 void skillsAuton()
+{
+  firstQuarter();
+  firstCrossover();
+  secondQuarter();
+  Brain.Screen.print(round(vex::timer::system() / 1000));
+}
+
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
+// Skills Auton
+
+int antiJamIntake()
+{
+  while (true)
+  {
+    if (Intake2.current() > 0 && Intake2.efficiency() == 0)
+    {
+      Intake2.spin(reverse, 100, pct);
+    }
+    else
+    {
+      Intake2.spin(fwd, 100, pct);
+    }
+  }
+
+  return 0;
+}
+
+void firstQuarter()
 {
   float error = 0;
   sweeperA = false;
@@ -62,88 +90,124 @@ void skillsAuton()
   clampB = true;
 
   goalStakeMacro();
-
+  vex::task::sleep(500);
   Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
   Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  // task intakeTask = task(antiJamIntake);
 
   vex::task::sleep(500);
 
   // chassis.drive_distance(7);
-
-  Intake2.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  // intakeTask.stop();//
+  task intakeTask = task(antiJamIntake);
   vex::task::sleep(500);
 
-  chassis.turn_to_angle(129 + error);
-  chassis.drive_distance(-21, 4);
+  chassis.turn_to_angle(115 + error);
+  chassis.drive_distance(-20, 4);
   //
   clampA = true;
   clampB = false; // clamap first gool
-  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
   // fun
   vex::task::sleep(1000);
+  // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  // intakeTask = task(antiJamIntake);
 
   error = error - 15;
   chassis.turn_to_angle(0 + error);
   chassis.drive_distance(25); // rizz up a ring
   //
   error = error - 12;
-  chassis.turn_to_angle(310 + error); // ring on the line
-  chassis.drive_distance(30);         // go there
+  chassis.turn_to_angle(317 + error); // ring on the line
+  // Intake1.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  // Intake2.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  chassis.drive_distance(34); // go there
+  // Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  // I love Mason <3
 
   error = error + 17.5;
   chassis.turn_to_angle(150 + error);
-  chassis.drive_distance(11); // go bacc
+  chassis.drive_distance(13); // go bacc
 
-  // chassis.turn_to_angle(180+error); 
+  // chassis.turn_to_angle(180+error);
   error = error + 10;
-  chassis.drive_distance(45, 180 + error, 6, 6); // go there
+  chassis.drive_distance(45, 180 + error, 4, 4); // go there
 
-  chassis.turn_to_angle(324 + error); // ring on the line
-  chassis.drive_distance(13);          // go there
+  chassis.turn_to_angle(340 + error); // ring on the line
+  chassis.drive_distance(13);         // go there
 
-  chassis.turn_to_angle(80 + error); // ring on the line
-  chassis.drive_distance(-13);
+  chassis.turn_to_angle(45 + error); // ring on the line
+  chassis.drive_distance(-15);
   clampA = false;
   clampB = true;
-  chassis.drive_distance(40);
-  
-  Brain.Screen.print((vex::timer::system() / 1000));
-  Controller.Screen.print((vex::timer::system() / 1000));
-  // chassis.turn_to_angle(135); //turn to other ring
-  // chassis.drive_distance(15);//goooooo
-
-  // vex::task::sleep(5000);
-
-  // chassis.turn_to_angle(200);
-  // chassis.drive_distance(41,5);
-  // chassis.turn_to_angle(288);
-  // chassis.drive_distance(15);
-  // chassis.turn_to_angle(30);
-  // chassis.drive_distance(-15);
-  // chassis.turn_to_angle(-300);
-  // chassis.drive_distance(-15);
-  // chassis.turn_to_angle(-300);
-
-  //   clampA = false;
-  //   clampB = true;
-  //   chassis.drive_distance(15);
-  // chassis.turn_to_angle(-90);
-  // chassis.drive_distance(-60);
-  //   clampA = true;
-  //   clampB = false;
-  //   // fun
-  //   vex::task::sleep(500);
-  //   chassis.turn_to_angle(-341);
-  //   chassis.drive_distance(25);
-  //   //
-  //   chassis.turn_to_angle(-285); //turnTo ring next to tristan
-  //   chassis.drive_distance(33); //go there
-  //   chassis.turn_to_angle(-135); //turn to other ring
-  //   chassis.drive_distance(15);//goooooo
-
-  // chassis.turn_to_angle(90);
+  vex::task::sleep(500);
+  intakeTask.stop(); 
+  Intake1.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  Intake2.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  chassis.drive_distance(23);
+  chassis.turn_to_angle(-90 + error); // ring on the line
 }
-// ██████████████████████████████████████████████████████████████████████████████████████████████████
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
+
+void firstCrossover()
+{
+  task intakeTask = task(antiJamIntake);
+  float error = 0;
+  chassis.drive_distance(-54);
+  chassis.turn_to_angle(-33 + error);
+  chassis.drive_distance(-14, 4);
+  clampA = true;
+  clampB = false;
+  vex::task::sleep(500);
+  intakeTask.stop(); 
+}
+
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
+
+void secondQuarter()
+{
+  task intakeTask = task(antiJamIntake);
+  float error = 0;
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  error = 15;
+  chassis.turn_to_angle(0 + error);
+  chassis.drive_distance(25); // rizz up a ring
+  //
+  error = error + 12;
+  chassis.turn_to_angle(-310 + error); // ring on the line
+  // RING FIX
+
+  chassis.drive_distance(34);
+
+  error = error - 17.5;
+  chassis.turn_to_angle(-150 + error);
+  chassis.drive_distance(9); // go bacc
+
+  // chassis.turn_to_angle(180+error);
+  error = error - 10;
+  chassis.drive_distance(42, -180 + error, 4, 4); // go there
+
+  chassis.turn_to_angle(-335 + error); // last ring
+  chassis.drive_distance(13);          //
+
+  chassis.turn_to_angle(-50 + error); // place mog
+  chassis.drive_distance(10);
+  chassis.drive_distance(-30);
+  intakeTask.stop(); 
+  Intake1.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  Intake2.spin(directionType::fwd, -200, vex::velocityUnits::pct);
+  clampA = false;
+  clampB = true;
+  vex::task::sleep(1000);
+  chassis.drive_distance(23);
+  chassis.turn_to_angle(0 + error); // ring on the line
+  chassis.drive_distance(20);
+}
+
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
+// ██████████████████████████████████████████████████████████████████████████████████████████████████ █
 
 /**
  * The expected behavior is to return to the start position.
@@ -186,21 +250,20 @@ void goalRushBlue()
 
 void backUpAuton()
 {
-  // clampA = false;
-  // clampB = true;
-  // chassis.drive_distance(-24);
-  // clampA = true;
-  // clampB = false;
-  // wait(1,seconds);
-  // Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  clampA = false;
+  clampB = true;
+  chassis.drive_distance(-24);
+  clampA = true;
+  clampB = false;
+  wait(1, seconds);
+  Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
+  wait(1, seconds);
+  // chassis.drive_distance(12);
+  // Intake1.spin(directionType::fwd, 0, vex::velocityUnits::pct);
   // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
-  // wait(1,seconds);
-  // // chassis.drive_distance(12);
-  // // Intake1.spin(directionType::fwd, 0, vex::velocityUnits::pct);
-  // // Intake2.spin(directionType::fwd, 200, vex::velocityUnits::pct);
-  // chassis.turn_to_angle(90);
-  // chassis.drive_distance(16);
-  chassis.drive_distance(-5);
+  chassis.turn_to_angle(180);
+  chassis.drive_distance(20);
 }
 void startMacro()
 {
@@ -356,7 +419,7 @@ void goalStakeMacro()
   sweeperB = true;
   clampA = false;
   clampB = true;
-  chassis.drive_distance(2);
+  chassis.drive_distance(1.5);
 }
 
 /**
