@@ -444,15 +444,38 @@ void usercontrol(void)
       if (ToggleL2 == true)
       {
 
-        if (ArmOn == 0)
-        // clampUpdate;
-        ToggleL2 = false;
+        ArmAngle++;
+        if (ArmAngle % 3 == 0){
+          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct); //degrees velocity velocityunits
+        } else if (ArmAngle % 3 == 1){
+          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        } else if (ArmAngle % 3 == 2){
+          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        }
+          // clampUpdate;
+          ToggleL2 = false;
       }
     }
     else
     {
       ToggleL2 = true;
     }
+
+    
+    if (Controller.ButtonUp.pressing())
+    { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
+      if (ToggleUp == true)
+      {
+
+        goalStakeMacro(); 
+        ToggleUp = false;
+      }
+    }
+    else
+    {
+      ToggleUp = true;
+    }
+
 
     // set clamp here
 

@@ -26,7 +26,7 @@ motor UpsidedownRight = motor(PORT3, ratio6_1, true);
 
 motor_group chassisRight = motor_group(frontRight, MiddleRight, UpsidedownRight);
 
-motor Arm = motor(PORT10);
+motor Arm = motor(PORT10, ratio6_1, true);
 
 motor Intake1 = motor(PORT19, ratio6_1, true);
 motor Intake2 = motor(PORT20, ratio6_1, true);
