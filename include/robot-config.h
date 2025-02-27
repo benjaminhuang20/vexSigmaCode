@@ -21,10 +21,7 @@ extern motor UpsidedownRight;
 
 extern motor_group chassisRight;
 
-extern motor Arm1;
-extern motor Arm2;
-
-extern motor_group Arms;
+extern motor Arm;
 
 extern motor Intake1;
 extern motor Intake2;

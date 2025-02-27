@@ -124,7 +124,7 @@ void pre_auton()
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   default_constants();
-  Arm1.resetPosition();
+  Arm.resetPosition();
 
   while (!auto_started)
   {
@@ -264,6 +264,7 @@ void usercontrol(void)
   Brain.Screen.print("Clamp Off");
   Controller.Screen.setCursor(2, 1), Controller.Screen.print("Clamp Off");
   bool ClampOn = true;
+  bool ArmOn = true;
   bool allowWarnings = false;
   int timeElapsed = 0;
   int oldTime = 0;
@@ -438,6 +439,21 @@ void usercontrol(void)
       ToggleR2 = true;
     }
 
+    if (Controller.ButtonL2.pressing())
+    { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
+      if (ToggleL2 == true)
+      {
+
+        if (ArmOn == 0)
+        // clampUpdate;
+        ToggleL2 = false;
+      }
+    }
+    else
+    {
+      ToggleL2 = true;
+    }
+
     // set clamp here
 
     if (Controller.ButtonX.pressing())
@@ -455,33 +471,6 @@ void usercontrol(void)
       ToggleX = true;
     }
 
-    if (Controller.ButtonL2.pressing())
-    { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
-      if (ToggleL2)
-      {
-        goalStakeMacro();
-
-        Brain.Screen.print("Arm Toggled");
-        ToggleL2 = false;
-      }
-    }
-    else
-    {
-      ToggleL2 = true;
-    }
-    if (Controller.ButtonUp.pressing())
-    { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
-      if (ToggleUp)
-      {
-        startMacro();
-
-        ToggleUp = false;
-      }
-    }
-    else
-    {
-      ToggleUp = true;
-    }
 
     if (Controller.ButtonA.pressing())
     { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
