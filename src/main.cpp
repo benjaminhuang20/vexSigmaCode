@@ -238,6 +238,39 @@ bool warnTemp2 = false;
 bool warnTemp3 = false;
 float averageDriveTemp;
 
+int ArmCode() {  
+  bool ToggleL2 = false;
+  int ArmAngle = 0;
+
+  // FIX: Store the result or use it in a condition
+  bool armStopped = (Arm.current() > 0 && Arm.efficiency() == 0);
+
+  while (true) {
+    if (Controller.ButtonL2.pressing()) { 
+      if (ToggleL2 == true) {
+        ArmAngle++;
+        if (ArmAngle % 3 == 0){
+          while (!(Arm.current() > 0 && Arm.efficiency() < 20)) {
+            Arm.spin(directionType::fwd, -100, velocityUnits::pct);
+          }
+          Arm.spinToPosition(0, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        } else if (ArmAngle % 3 == 1){
+          Arm.spinToPosition(52, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        } else if (ArmAngle % 3 == 2){
+          Arm.spinToPosition(260, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        }
+        ToggleL2 = false;
+      }
+    } else {
+      ToggleL2 = true;
+    }
+    vex::task::sleep(10);  // Prevent CPU overload
+  }
+  return 0;  // Required return statement for a task function
+}
+
+
+
 void usercontrol(void)
 {
   // User control code here, inside the loop
@@ -253,10 +286,14 @@ void usercontrol(void)
   // bool DoinkerOn;
   bool ToggleA = false, ToggleX = false, ToggleR2 = false, ToggleL2 = false, ToggleBY = false, ToggleUp = false, ToggleDown = false;
   int ArmAngle = 0;
+
+  
+
+  task ArmTask = task(ArmCode);
   // int ArmAngleFinal = 0;
   // int arm1Start = Arm1.
 
-  // clampUpdate; /04gtk4jg924jg9024jg024jg
+  // clampUpdate;
   Brain.Screen.setCursor(3, 1);
   Brain.Screen.print("Normal Mode");
   Controller.Screen.setCursor(1, 1), Controller.Screen.print("Normal Mode");
@@ -439,28 +476,10 @@ void usercontrol(void)
       ToggleR2 = true;
     }
 
-    if (Controller.ButtonL2.pressing())
-    { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
-      if (ToggleL2 == true)
-      {
 
-        ArmAngle++;
-        if (ArmAngle % 3 == 0){
-          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct); //degrees velocity velocityunits
-        } else if (ArmAngle % 3 == 1){
-          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
-        } else if (ArmAngle % 3 == 2){
-          Arm.spinToPosition(90,vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
-        }
-          // clampUpdate;
-          ToggleL2 = false;
-      }
-    }
-    else
-    {
-      ToggleL2 = true;
-    }
+  
 
+   
     
     if (Controller.ButtonUp.pressing())
     { // If you are confused by this pls visit https://scratch.mit.edu/projects/1122100301/ for demo
@@ -593,3 +612,4 @@ int main()
 // big men are better
 // why won't it work
 // big man work pls
+

@@ -253,12 +253,12 @@ void TresRedRing()
   sweeperB = true;
   clampA = false;
   clampB = true;
-  chassis.drive_distance(-20);
+  chassis.drive_distance(-22);
   clampA = true;
   clampB = false;
+  vex::task::sleep(100);
   task intakeTask = task(antiJamIntake);
   Intake1.spin(directionType::fwd, 200, vex::velocityUnits::pct);
-  vex::task::sleep(100);
   vex::task::sleep(400);
   chassis.turn_to_angle(120);
   chassis.drive_distance(25);
@@ -267,8 +267,8 @@ void TresRedRing()
   chassis.drive_distance(-13);
   chassis.turn_to_angle(220);
   chassis.drive_distance(13);
-  chassis.turn_to_angle(300);
-  chassis.drive_distance(20);
+  chassis.turn_to_angle(320);
+  chassis.drive_distance(45);
   intakeTask.stop();
 }
 void TresBlueRing(){
