@@ -251,17 +251,22 @@ void moveToAngle(double targetAngle) {
         Controller.Screen.setCursor(2, 1);
         Controller.Screen.print(currentAngle);
 
-        if(RotationSensor.angle(degrees) > 0 && RotationSensor.angle(degrees) < 10) {
-          error = targetAngle - 360;
-        }
+        // if(RotationSensor.angle(degrees) > 0 && RotationSensor.angle(degrees) < 10) {
+        //   error = targetAngle - 360;
+        // }
 
         // Determine shortest direction (Clockwise vs Counterclockwise)
-        if (error > 180) {
+        while (true){
+          if (error > 180) {
             error -= 360; // Move counterclockwise
-        } 
-        else if (error < -180) {
-            error += 360; // Move clockwise
+          } 
+          else if (error < -180) {
+              error += 360; // Move clockwise
+          } else{
+            break; //once it is within the confines it will leave the while loop 
+          }
         }
+        
 
         double speed = error * 0.5; // Adjust control factor
         speed = clamp(speed, -50.0, 50.0); // Use custom clamp function
