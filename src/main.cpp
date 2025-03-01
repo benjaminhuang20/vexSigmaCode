@@ -1,5 +1,6 @@
 #include "vex.h"
 
+
 using namespace vex;
 competition Competition;
 
@@ -238,40 +239,78 @@ bool warnTemp2 = false;
 bool warnTemp3 = false;
 float averageDriveTemp;
 
-int ArmCode() {  
-  bool ToggleL2 = false;
-  int ArmAngle = 0;
+vex::rotation RotationSensor = vex::rotation(PORT15); // Replace PORT15 with actual sensor port
 
-  // FIX: Store the result or use it in a condition
-  bool armStopped = (Arm.current() > 0 && Arm.efficiency() == 0);
+void moveToAngle(double targetAngle) {
+    while (fabs(RotationSensor.angle(degrees) - targetAngle) > 10) {  
+        double currentAngle = RotationSensor.angle(degrees);
+        double error = targetAngle - currentAngle;
+        Controller.Screen.clearScreen();
+        Controller.Screen.setCursor(1, 1);
+        Controller.Screen.print(error);
+        Controller.Screen.setCursor(2, 1);
+        Controller.Screen.print(currentAngle);
 
-  while (true) {
-    if (Controller.ButtonL2.pressing()) { 
-      if (ToggleL2 == true) {
-        ArmAngle++;
-        if (ArmAngle % 3 == 0){
-          Arm.spin(directionType::fwd, -100, velocityUnits::pct);
-          vex::task::sleep(500);
-          while (Arm.velocity(velocityUnits::pct) > -10) 
-          {  
-          
-          }
-      Arm.stop(); // Stop the motor after it stops moving
-      Arm.resetPosition(); 
-        } else if (ArmAngle % 3 == 1){
-          Arm.spinToPosition(48, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
-        } else if (ArmAngle % 3 == 2){
-          Arm.spinToPosition(260, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+        if(RotationSensor.angle(degrees) > 0 && RotationSensor.angle(degrees) < 10) {
+          error = targetAngle - 360;
         }
-        ToggleL2 = false;
-      }
-    } else {
-      ToggleL2 = true;
+
+        // Determine shortest direction (Clockwise vs Counterclockwise)
+        if (error > 180) {
+            error -= 360; // Move counterclockwise
+        } 
+        else if (error < -180) {
+            error += 360; // Move clockwise
+        }
+
+        double speed = error * 0.5; // Adjust control factor
+        speed = clamp(speed, -50.0, 50.0); // Use custom clamp function
+
+        // Spin in correct direction based on error
+            Arm.spin(directionType::rev, speed, velocityUnits::pct); // Counterclockwise
+
+        vex::task::sleep(10); // Small delay to prevent CPU overload
     }
-    vex::task::sleep(10);  // Prevent CPU overload
-  }
-  return 0;  // Required return statement for a task function
+    Arm.stop(hold);
 }
+
+int ArmCode() {  
+    bool ToggleL2 = false;
+    int state = 0; // Keeps track of arm position state
+
+    while (true) {
+        if (Controller.ButtonL2.pressing()) { 
+            if (ToggleL2) {
+                if (state == 0) {
+                    moveToAngle(333);  // Move to first position
+                    state = 1;
+                } 
+                else if (state == 1) {
+                    moveToAngle(220); // Move to second position
+                    state = 2;
+                } 
+                else {
+                    Controller.Screen.clearScreen();
+                    Controller.Screen.print("moving back");
+                    moveToAngle(0); // Move back to 0° (now counterclockwise)
+                    state = 0;
+                }
+                
+                ToggleL2 = false;
+            }
+        } else {
+            ToggleL2 = true;
+        }
+
+        vex::task::sleep(10);  // Prevent CPU overload
+    }
+
+    return 0;  // Required return statement for a task function
+}
+
+
+
+
 
 
 
