@@ -250,12 +250,16 @@ int ArmCode() {
       if (ToggleL2 == true) {
         ArmAngle++;
         if (ArmAngle % 3 == 0){
-          while (!(Arm.current() > 0 && Arm.efficiency() < 20)) {
-            Arm.spin(directionType::fwd, -100, velocityUnits::pct);
+          Arm.spin(directionType::fwd, -100, velocityUnits::pct);
+          vex::task::sleep(500);
+          while (Arm.velocity(velocityUnits::pct) > -10) 
+          {  
+          
           }
-          Arm.spinToPosition(0, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+      Arm.stop(); // Stop the motor after it stops moving
+      Arm.resetPosition(); 
         } else if (ArmAngle % 3 == 1){
-          Arm.spinToPosition(52, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
+          Arm.spinToPosition(48, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
         } else if (ArmAngle % 3 == 2){
           Arm.spinToPosition(260, vex::rotationUnits::deg, 50, vex::velocityUnits::pct);
         }
