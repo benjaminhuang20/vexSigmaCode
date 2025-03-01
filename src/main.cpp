@@ -242,8 +242,8 @@ float averageDriveTemp;
 vex::rotation RotationSensor = vex::rotation(PORT15); // Replace PORT15 with actual sensor port
 
 void moveToAngle(double targetAngle) {
-    while (fabs(RotationSensor.angle(degrees) - targetAngle) > 10) {  
-        double currentAngle = RotationSensor.angle(degrees);
+    while (fabs(RotationSensor.position(degrees) - targetAngle) > 10) {  
+        double currentAngle = RotationSensor.position(degrees);
         double error = targetAngle - currentAngle;
         Controller.Screen.clearScreen();
         Controller.Screen.setCursor(1, 1);
